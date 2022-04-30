@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">SudokuKing</string>
+    <string name="game_title_navigation">Game</string>
+    <string name="statistics_title_navigation">Statistics</string>
+    <string name="account_title_navigation">Account</string>
+</resources>
