@@ -3,4 +3,35 @@
     <string name="game_title_navigation">Game</string>
     <string name="statistics_title_navigation">Statistics</string>
     <string name="account_title_navigation">Account</string>
+
+    <string name="sudoku_gameType_ranked">Play Ranked</string>
+    <string name="sudoku_gameType_unranked">Play Unranked</string>
+    <string name="sudoku_gameType_continue">Continue Game</string>
+    <string name="sudoku_difficulty_hard">Hard</string>
+    <string name="sudoku_difficulty_medium">Medium</string>
+    <string name="sudoku_difficulty_easy">Hard</string>
+
+    <string name="account_not_logged_in">You are not logged in</string>
+    <string name="account_loggIn_button">Login</string>
+    <string name="account_register_button">Register</string>
+    <string name="account_accountName_placeholder">User Name</string>
+    <string name="account_password_placeholder">User Name</string>
+    <string name="account_repeatPassword_placeholder">User Name</string>
+    <string name="account_headline_loggedIn">Account</string>
+    <string name="account_loggOut_Button">Logout</string>
+    <string name="account_deleteAccount_Button">Logout</string>
+
+    <string name="statistic_unregisteredStats_Title">Unregistered</string>
+    <string name="statistic_registeredStats_Title">Registered</string>
+    <string name="statistic_difficulty_easy_title">Easy</string>
+    <string name="statistic_difficulty_medium_title">Easy</string>
+    <string name="statistic_difficulty_hard_title">Easy</string>
+    <string name="statistic_resolved">resolved</string>
+    <string name="statistic_unresolved">unresolved</string>
+    <string name="statistic_registered_rank">Rank</string>
+    <string name="statistic_best">Best</string>
+    <string name="statistic_rank_bronze">Bronze</string>
+    <string name="statistic_rank_silver">Silver</string>
+    <string name="statistic_rank_gold">Gold</string>
+    <string name="statistic_rank_platinum">Platinum</string>
 </resources>
