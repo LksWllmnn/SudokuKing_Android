@@ -1,4 +1,4 @@
-package com.example.sudokuking.domain.model
+package com.example.sudokuking.domain
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

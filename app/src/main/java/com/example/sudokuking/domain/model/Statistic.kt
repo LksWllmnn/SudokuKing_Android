@@ -1,6 +1,5 @@
 package com.example.sudokuking.domain.model
 
-import java.time.ZonedDateTime
 
 class Statistic private constructor(
     val title: String,
