@@ -1,6 +1,5 @@
 package com.example.sudokuking.feature.sudoku
 
-import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -13,16 +12,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.sudokuking.domain.model.SudokuField
-import com.example.sudokuking.ui.theme.LavBlue
 
 @Composable
-fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color) {
+fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color, tileOffset: Float) {
     Box(modifier = Modifier
         .border(0.5.dp, MaterialTheme.colors.onBackground)
         .padding(0.dp)
-        .background(color = boxColor)) {
+        .background(color = boxColor)
+    )
+    {
         Column() {
-            Box() {
+            Box(modifier = Modifier
+                .width(tileOffset.dp)
+                .height(tileOffset.dp)) {
                 Text(
                     modifier = Modifier
                         .align(alignment = Alignment.Center),
