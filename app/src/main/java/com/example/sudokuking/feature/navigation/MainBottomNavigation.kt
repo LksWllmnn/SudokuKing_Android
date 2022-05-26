@@ -26,7 +26,7 @@ fun MainBottomNavigation(navController: NavController) {
                     Icon(painter = painterResource(navItem.icon), contentDescription = navItem.routeName)
                 },
                 onClick = {
-                    navController.navigate(navItem.routeName) {
+                    navController.navigate(navItem.routeName) /*{
                         navController.graph.startDestinationRoute?.let { screen_route ->
                             popUpTo(screen_route) {
                                 saveState = true
@@ -34,7 +34,7 @@ fun MainBottomNavigation(navController: NavController) {
                         }
                         launchSingleTop = true
                         restoreState = true
-                    }
+                    }*/
                 },
             )
         }

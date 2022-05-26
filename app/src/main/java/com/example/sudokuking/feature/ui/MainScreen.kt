@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.sudokuking.feature.account.AccountNavigationItem
 import com.example.sudokuking.feature.navigation.BottomNavigationItem.Account
 import com.example.sudokuking.feature.navigation.BottomNavigationItem.Statistics
 import com.example.sudokuking.feature.navigation.BottomNavigationItem.Game
@@ -40,6 +41,10 @@ fun MainScreenUI() {
                         Account.routeName -> Text(stringResource(Account.title))
                         Statistics.routeName -> Text(stringResource(Statistics.title))
                         Game.routeName -> Text(stringResource(Game.title))
+                        AccountNavigationItem.NotLoggedIn.routeName -> Text("Account - Not Logged In")
+                        AccountNavigationItem.Login.routeName -> Text("Account - Login")
+                        AccountNavigationItem.Register.routeName -> Text("Account - Register")
+                        AccountNavigationItem.LoggedIn.routeName -> Text("Account - Your Account")
                     }
                 },
             )
