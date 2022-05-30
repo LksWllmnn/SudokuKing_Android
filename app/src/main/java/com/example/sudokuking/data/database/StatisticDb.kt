@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "statistic")
-class StatisticDb (
+data class StatisticDb (
     @PrimaryKey
     val title: String,
     val resolved: Int,

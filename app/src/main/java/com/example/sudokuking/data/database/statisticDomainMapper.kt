@@ -10,7 +10,7 @@ fun statisticToDb(statistic: Statistic): StatisticDb = StatisticDb(
     best = statistic.best
 )
 
-fun statisticFromDb(statistic: StatisticDb): Statistic? {
+fun statisticFromDb(statistic: StatisticDb): Statistic {
     return Statistic.create(
         title = statistic.title,
         resolved = statistic.resolved,

@@ -26,8 +26,7 @@ class Statistic private constructor(
             unresolved: Int,
             average: Float,
             best: Float
-        ): Statistic? {
-            if (title.isBlank()) return null
+        ): Statistic {
             return Statistic(title, resolved, unresolved, average, best)
         }
     }

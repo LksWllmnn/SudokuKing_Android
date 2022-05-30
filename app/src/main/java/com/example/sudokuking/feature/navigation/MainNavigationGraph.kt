@@ -9,7 +9,7 @@ import com.example.sudokuking.feature.sudoku.SudokuScreen
 
 @Composable
 fun MainNavigationGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = "game") {
+    NavHost(navController, startDestination = "statistics") {
 
         composable(BottomNavigationItem.Account.routeName) {
             AccountScreen(navController)
