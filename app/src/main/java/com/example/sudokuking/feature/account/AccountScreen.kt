@@ -6,7 +6,8 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun AccountScreen(navController: NavHostController) {
-    NotLoggedInItem(navController)
+    //if
+    NotLoggedInScreen(navController)
     //LoggedInItem()
     //LoginItem()
     //RegisterItem()

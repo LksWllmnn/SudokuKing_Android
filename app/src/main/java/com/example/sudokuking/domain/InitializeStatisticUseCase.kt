@@ -13,14 +13,12 @@ class InitializeStatisticUseCase(
     private val context: CoroutineContext = Dispatchers.Default,
 ) {
     suspend operator fun invoke() = withContext(context) {
-        //if (statisticRepository.getAllStatistics().isNotEmpty()) return@withContext
-        //App.database.statisticDao().insert(StatisticDb("easy", 0, 0, 0f, 0f))
+        if (statisticRepository.getAllStatistics().isNotEmpty()) return@withContext
         listOf(
             Statistic.create("Easy",45,55,13.5f,5.5f),
             Statistic.create("Medium",35,65,14.5f,6.5f),
             Statistic.create("Hard",25,75,15.5f,7.5f)
         ).forEach{statisticRepository.addStatistic(it)}
-        //}
-        //statisticRepository.initStatistics()
+
     }
 }

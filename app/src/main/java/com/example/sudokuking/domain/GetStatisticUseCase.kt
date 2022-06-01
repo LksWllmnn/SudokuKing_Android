@@ -6,5 +6,4 @@ import com.example.sudokuking.data.statisticRepo
 
 class GetStatisticUseCase {
     suspend operator fun invoke() = withContext(Dispatchers.Default) { statisticRepo.getAllStatistics() }
-
 }

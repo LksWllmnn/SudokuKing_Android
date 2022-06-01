@@ -17,7 +17,7 @@ class StatisticRepository @Inject constructor(
 
     suspend fun getAllStatistics(): List<Statistic> = dao.getAll().map{ statisticFromDb(it) }
 
-    fun observeAllStatistics(): Flow<List<Statistic>> = dao.observeAll().map { it.mapNotNull(::statisticFromDb) }
+    suspend fun observeAllStatistics(): Flow<List<Statistic>> = dao.observeAll().map { it.mapNotNull(::statisticFromDb) }
 
     suspend fun addStatistic(statistic: Statistic) {
         dao.insert(

@@ -19,7 +19,7 @@ class StatisticViewModel @Inject constructor(): ViewModel() {
                     unresolved = statistic.unresolved,
                     average = statistic.average,
                     best = statistic.best)
-            }.sortedBy { it.title }
+            }
             emit(result)
         }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "00_nodetestserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/dist/server.js",
+  "dependencies": {
+    "@types/mongodb": "^4.0.7",
+    "mongodb": "^4.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lw",
+  "license": "ISC"
+}

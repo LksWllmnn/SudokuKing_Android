@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun NotLoggedInItem (navController: NavHostController) {
-
+fun LoggedInScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .padding(5.dp)
         .fillMaxWidth()
@@ -25,27 +24,31 @@ fun NotLoggedInItem (navController: NavHostController) {
             .fillMaxWidth()) {
             Column() {
                 Text(
-                    text = "You are not Logged In",
+                    text = "Account",
                     modifier = Modifier
                         .padding(5.dp)
                 )
-                Button(
-                    onClick = { navController.navigate(AccountNavigationItem.Login.routeName)},
+                Text(
+                    text = "Username: Test",
                     modifier = Modifier
                         .padding(5.dp)
-                ) {
-                    Text(text = "Login")
-                }
-
-                Button(
-                    onClick = { navController.navigate(AccountNavigationItem.Register.routeName) },
-                    modifier = Modifier
-                        .padding(5.dp)
-                ) {
-                    Text(text = "Register")
-                }
+                )
             }
         }
+        Button(
+            onClick = { navController.navigate(AccountNavigationItem.NotLoggedIn.routeName) },
+            modifier = Modifier
+                .padding(5.dp)
+        ) {
+            Text(text = "Logout")
+        }
 
+        Button(
+            onClick = { navController.navigate(AccountNavigationItem.NotLoggedIn.routeName) },
+            modifier = Modifier
+                .padding(5.dp)
+        ) {
+            Text(text = "Delete Account")
+        }
     }
 }

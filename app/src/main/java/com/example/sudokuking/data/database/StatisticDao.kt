@@ -4,16 +4,17 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface StatisticDao {
+abstract class StatisticDao {
     @Insert
-    suspend fun insert(statistic: StatisticDb)
+    abstract suspend fun insert(statistic: StatisticDb)
 
     @Query("SELECT * FROM statistic")
-    suspend fun getAll(): List<StatisticDb>
+    abstract suspend fun getAll(): List<StatisticDb>
 
     @Query("SELECT * FROM statistic")
-    fun observeAll(): Flow<List<StatisticDb>>
+    abstract fun observeAll(): Flow<List<StatisticDb>>
 
     @Query("DELETE FROM statistic")
-    suspend fun deleteAll()
+    abstract suspend fun deleteAll()
+
 }

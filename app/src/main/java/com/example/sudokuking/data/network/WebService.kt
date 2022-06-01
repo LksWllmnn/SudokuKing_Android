@@ -20,8 +20,12 @@ interface WebService {
     @PUT("v1/statistic/{id}")
     suspend fun addStatistic(@Path("id") id: String, @Body body: AddStatisticRequestDto)
 
+    @GET("testConnection")
+    suspend fun testConnection(): String
+
     companion object {
-        const val BASE_URL = "http://10.0.2.2:8080/"
+        const val BASE_URL = "http://127.0.0.1.8101/"
+        //const val BASE_URL = "http://10.0.2.2:8080/"
     }
 }
 

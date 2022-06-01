@@ -10,6 +10,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
@@ -20,8 +21,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun RegisterItem(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .padding(5.dp)
         .fillMaxWidth()
@@ -32,60 +34,25 @@ fun RegisterItem(navController: NavHostController) {
             .fillMaxWidth()) {
             Column() {
                 Text(
-                    text = "Register",
+                    text = "Login",
                     modifier = Modifier
                         .padding(5.dp)
                 )
-
-                val focusManager = LocalFocusManager.current
                 var username by remember { mutableStateOf("") }
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
                     singleLine = true,
                     label = { Text("Username") },
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            focusManager.clearFocus()
-                        }
-                    ),
-                    modifier = Modifier.onKeyEvent {
-                        if(it.nativeKeyEvent.keyCode == NativeKeyEvent.KEYCODE_ENTER) {
-                            focusManager.clearFocus()
-                            true
-                        }
-                        false
-                    }
                 )
 
+                val focusManager = LocalFocusManager.current
                 var password by remember { mutableStateOf("") }
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
                     singleLine = true,
                     label = { Text("Password") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            focusManager.clearFocus()
-                        }
-                    ),
-                    modifier = Modifier.onKeyEvent {
-                        if(it.nativeKeyEvent.keyCode == NativeKeyEvent.KEYCODE_ENTER) {
-                            focusManager.clearFocus()
-                            true
-                        }
-                        false
-                    }
-                )
-
-                var passwordAgain by remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = passwordAgain,
-                    onValueChange = { passwordAgain = it },
-                    singleLine = true,
-                    label = { Text("Password Again") },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(

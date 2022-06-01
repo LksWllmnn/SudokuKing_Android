@@ -24,19 +24,19 @@ fun MainNavigationGraph(navController: NavHostController) {
 
         //Account
         composable(AccountNavigationItem.NotLoggedIn.routeName) {
-            NotLoggedInItem(navController = navController)
+            NotLoggedInScreen(navController = navController)
         }
 
         composable(AccountNavigationItem.Login.routeName) {
-            LoginItem(navController = navController)
+            LoginScreen(navController = navController)
         }
 
         composable(AccountNavigationItem.Register.routeName) {
-            RegisterItem(navController = navController)
+            RegisterScreen(navController = navController)
         }
 
         composable(AccountNavigationItem.LoggedIn.routeName) {
-            LoggedInItem(navController = navController)
+            LoggedInScreen(navController = navController)
         }
     }
 }
