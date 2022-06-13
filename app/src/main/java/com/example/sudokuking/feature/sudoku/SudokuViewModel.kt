@@ -4,9 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.example.sudokuking.domain.GetSudokuUseCase
+import com.example.sudokuking.domain.SelectSudokuField
 import com.example.sudokuking.domain.model.SudokuField
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,4 +24,10 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
             }
             emit(result)
         }
+
+    fun onSelectField(sudokuField: SudokuField) {
+        viewModelScope.launch {
+            SelectSudokuField()(sudokuField)
+        }
+    }
 }

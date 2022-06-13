@@ -7,32 +7,41 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
 fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit) {
     Card(
         elevation = 3.dp,
         modifier = Modifier
-            .padding(5.dp)
+            .padding(10.dp)
             .fillMaxWidth()
-            .fillMaxHeight()
-    ) {
 
+    ) {
         val scrollState = rememberLazyListState()
-        LazyColumn(state = scrollState) {
-            items(sudokus) {sudoku ->
-                SudokuItem(sudoku = sudoku)
+        Column()
+         {
+            LazyColumn(
+                state = scrollState,
+                modifier = Modifier
+                .height(LocalConfiguration.current.screenWidthDp.dp)
+            ) {
+                items(sudokus) {sudoku ->
+                    SudokuItem(sudoku = sudoku, selectField)
+                }
             }
+             NumbFieldItem( )
         }
     }
 }

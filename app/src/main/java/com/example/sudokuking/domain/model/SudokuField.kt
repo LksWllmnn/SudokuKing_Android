@@ -1,6 +1,8 @@
 package com.example.sudokuking.domain.model
 
 class SudokuField private constructor(
+    var isSelected: Boolean,
+    val index: Int,
     val notes: List<Int>?,
     val number: Int
 ){
@@ -14,11 +16,12 @@ class SudokuField private constructor(
 
     companion object {
         fun create(
+            isSelected: Boolean,
+            index: Int,
             notes: List<Int>?,
             number: Int
         ): SudokuField {
-            return SudokuField(notes, number)
-            //return SudokuField(number)
+            return SudokuField(isSelected, index, notes, number)
         }
     }
 }
