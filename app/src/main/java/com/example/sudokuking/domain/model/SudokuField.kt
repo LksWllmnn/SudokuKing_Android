@@ -4,7 +4,7 @@ class SudokuField private constructor(
     var isSelected: Boolean,
     val index: Int,
     val notes: List<Int>?,
-    val number: Int
+    var number: Int
 ){
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

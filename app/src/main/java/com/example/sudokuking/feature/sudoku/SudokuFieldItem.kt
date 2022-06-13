@@ -55,14 +55,7 @@ fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color,
                 .height((tileOffset*0.3).dp)
 
             ) {
-                //var notesString: String = ""
-                //if(sudokuField.notes != null) {
-                //    for(note in sudokuField.notes) {
-                //        notesString += "" + sudokuField.notes[note] + ","
-                //    }
-                //}
                 Text(text = ""  + sudokuField.notes,fontSize = 10.sp)
-
             }
         }
     }

@@ -27,7 +27,7 @@ class SudokuRepository @Inject constructor()
 
      fun observeSudoku(): Flow<Sudoku> = currentSudoku.map { it.sudoku }
 
-     fun getAllSudokuFields(): List<SudokuField> {
+     private fun getAllSudokuFields(): List<SudokuField> {
          val result: MutableList<SudokuField> = mutableListOf()
 
          for (row in sudoku[0].sudokuFields) {
@@ -40,6 +40,16 @@ class SudokuRepository @Inject constructor()
 
      fun getSudokuFieldById(_id: Int): SudokuField? = getAllSudokuFields().firstOrNull {
          it.index == _id
+     }
+
+     fun deselectSudokuFields() {
+         getAllSudokuFields().forEach{
+             it.isSelected = false
+         }
+     }
+
+     fun getSelectedField(): SudokuField? = getAllSudokuFields().firstOrNull {
+         it.isSelected
      }
 
 }

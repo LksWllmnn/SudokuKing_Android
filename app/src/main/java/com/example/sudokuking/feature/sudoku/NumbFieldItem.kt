@@ -7,28 +7,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
-fun NumbFieldItem() {
+fun NumbFieldItem(setNumb: (number: Int) -> Unit) {
 
-    Column(
-
-    ) {
+    Column() {
         Row() {
             Button(
-
-                onClick = { /*TODO*/ }
+                onClick = { setNumb(1) }
             ) {
                 Text(text = "1")
             }
             Button(
 
-                onClick = {  }) {
+                onClick = { setNumb(2) }) {
                 Text(text = "2")
             }
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(3) }) {
                 Text(text = "3")
             }
 
@@ -36,34 +34,34 @@ fun NumbFieldItem() {
         Row() {
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(4) }) {
                 Text(text = "4")
             }
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(5) }) {
                 Text(text = "5")
             }
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(6) }) {
                 Text(text = "6")
             }
         }
         Row() {
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(7) }) {
                 Text(text = "7")
             }
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(8) }) {
                 Text(text = "8")
             }
             Button(
 
-                onClick = { /*TODO*/ }) {
+                onClick = { setNumb(9) }) {
                 Text(text = "9")
             }
         }
@@ -81,5 +79,4 @@ fun NumbFieldItem() {
 @Preview
 @Composable
 fun NumbFieldItem_Preview() {
-    NumbFieldItem()
 }

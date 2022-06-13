@@ -17,11 +17,11 @@ import com.example.sudokuking.domain.model.SudokuField
 @Composable
 fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit) {
     Card(
         elevation = 3.dp,
         modifier = Modifier
@@ -41,7 +41,7 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit) 
                     SudokuItem(sudoku = sudoku, selectField)
                 }
             }
-             NumbFieldItem( )
+             NumbFieldItem( setNumb )
         }
     }
 }
