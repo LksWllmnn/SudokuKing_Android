@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sudokuking.domain.DeleteNumberUseCase
 import com.example.sudokuking.domain.GetSudokuUseCase
 import com.example.sudokuking.domain.SelectSudokuField
 import com.example.sudokuking.domain.SetNewNumberUseCase
@@ -36,6 +37,12 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
     fun onSetNumber(number: Int) {
         viewModelScope.launch {
             SetNewNumberUseCase()(number)
+        }
+    }
+
+    fun onDeleteNumber() {
+        viewModelScope.launch {
+            DeleteNumberUseCase()()
         }
     }
 }

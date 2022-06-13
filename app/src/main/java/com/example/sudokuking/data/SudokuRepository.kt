@@ -60,7 +60,8 @@ fun createListOfSudokuFields(): MutableList<MutableList<SudokuField>> {
     for (rows in 0..8) {
         var sudokuRow: MutableList <SudokuField> = mutableListOf()
         for(columns in 0..8) {
-            sudokuRow.add(SudokuField.create(isSelected = false,notes = listOf(1,2), index = rows * 10 + columns, number = rows * 10 + columns))
+            if (columns%2 == 0) sudokuRow.add(SudokuField.create(isSelected = false,notes = listOf(1,2), index = rows * 10 + columns, number =(rows * 10 + columns).toString(), isFixed = false))
+            else sudokuRow.add(SudokuField.create(isSelected = false,notes = listOf(1,2), index = rows * 10 + columns, number =(rows * 10 + columns).toString(), isFixed = true))
         }
         sudoku.add(sudokuRow)
     }

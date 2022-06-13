@@ -10,8 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
-fun NumbFieldItem(setNumb: (number: Int) -> Unit) {
-
+fun NumbFieldItem(setNumb: (number: Int) -> Unit, deleteNumb: () -> Unit) {
     Column() {
         Row() {
             Button(
@@ -20,60 +19,49 @@ fun NumbFieldItem(setNumb: (number: Int) -> Unit) {
                 Text(text = "1")
             }
             Button(
-
                 onClick = { setNumb(2) }) {
                 Text(text = "2")
             }
             Button(
-
                 onClick = { setNumb(3) }) {
                 Text(text = "3")
             }
-
         }
         Row() {
             Button(
-
                 onClick = { setNumb(4) }) {
                 Text(text = "4")
             }
             Button(
-
                 onClick = { setNumb(5) }) {
                 Text(text = "5")
             }
             Button(
-
                 onClick = { setNumb(6) }) {
                 Text(text = "6")
             }
         }
         Row() {
             Button(
-
                 onClick = { setNumb(7) }) {
                 Text(text = "7")
             }
             Button(
-
                 onClick = { setNumb(8) }) {
                 Text(text = "8")
             }
             Button(
-
                 onClick = { setNumb(9) }) {
                 Text(text = "9")
             }
         }
         Row(horizontalArrangement = Arrangement.Center) {
             Button(
-
-                onClick = { /*TODO*/ }) {
+                onClick = { deleteNumb() }) {
                 Text(text = "✕")
             }
         }
     }
-
 }
 
 @Preview

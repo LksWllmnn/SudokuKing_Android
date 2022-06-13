@@ -11,6 +11,9 @@ class SelectSudokuField {
         if (field == null) {
             return@withContext false
         }
+        if (field.isFixed) {
+            return@withContext false
+        }
         sudokuRepo.deselectSudokuFields()
         field.isSelected = true
         return@withContext true

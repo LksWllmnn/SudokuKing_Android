@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -42,13 +43,15 @@ fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color,
                 .width(tileOffset.dp)
                 .height((tileOffset*0.7).dp)
             ) {
+                var fontWeight = FontWeight.Normal
+                if(sudokuField.isFixed) fontWeight = FontWeight.ExtraBold
                 Text(
                   modifier = Modifier
                       .align(alignment = Alignment.Center),
                   textAlign = TextAlign.Center,
                   color = textColor,
-
-                  text = "" + sudokuField.number
+                  text = "" + sudokuField.number,
+                  fontWeight = fontWeight
                 )
             }
             Box(modifier = Modifier
