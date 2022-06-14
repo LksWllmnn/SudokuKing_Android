@@ -5,7 +5,7 @@ class SudokuField private constructor(
     val index: Int,
     val notes: List<Int>?,
     var number: String,
-    val isFixed: Boolean
+    var isFixed: Boolean
 ){
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

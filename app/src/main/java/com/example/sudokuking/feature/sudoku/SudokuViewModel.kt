@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.sudokuking.domain.DeleteNumberUseCase
-import com.example.sudokuking.domain.GetSudokuUseCase
-import com.example.sudokuking.domain.SelectSudokuField
-import com.example.sudokuking.domain.SetNewNumberUseCase
+import com.example.sudokuking.domain.*
 import com.example.sudokuking.domain.model.SudokuField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,6 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SudokuViewModel @Inject constructor(): ViewModel() {
+    var isLoaded: Boolean = false
+
     fun bindUI(context: Context): LiveData<List<SudokuUI>> =
         liveData {
             val result = GetSudokuUseCase()().map { sudoku ->
@@ -44,5 +43,12 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
         viewModelScope.launch {
             DeleteNumberUseCase()()
         }
+    }
+
+    fun onLoadSudoku(context: Context) {
+        viewModelScope.launch {
+            LoadSudokuFromFileUseCase()(context)
+        }
+        this.isLoaded = true
     }
 }

@@ -1,8 +1,11 @@
 package com.example.sudokuking.feature.sudoku
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -17,22 +20,24 @@ import com.example.sudokuking.domain.model.SudokuField
 @Composable
 fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Context) -> Unit, isLoaded:Boolean) {
+    if(!isLoaded) {
+        onLoadSudoku(LocalContext.current)
+    }
     Card(
         elevation = 3.dp,
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
-
     ) {
         val scrollState = rememberLazyListState()
         Column()
          {
-            LazyColumn(
+             LazyColumn(
                 state = scrollState,
                 modifier = Modifier
                 .height(LocalConfiguration.current.screenWidthDp.dp)

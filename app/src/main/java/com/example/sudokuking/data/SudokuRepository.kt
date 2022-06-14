@@ -1,14 +1,17 @@
 package com.example.sudokuking.data
 
-import com.example.sudokuking.data.database.statisticFromDb
-import com.example.sudokuking.domain.GetSudokuUseCase
-import com.example.sudokuking.domain.model.Statistic
+import android.R
+import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 import com.example.sudokuking.domain.model.Sudoku
 import com.example.sudokuking.domain.model.SudokuField
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import javax.inject.Inject
+
 
 val sudokuRepo = SudokuRepository()
 
@@ -22,6 +25,11 @@ class SudokuRepository @Inject constructor()
         "test",
         createListOfSudokuFields())
     ).filterNotNull()
+
+     private val solvedSudoku = Sudoku.create(
+             "testSolved",
+            createListOfSudokuFields()
+     )
 
      fun getSudoku() = sudoku
 
@@ -38,7 +46,22 @@ class SudokuRepository @Inject constructor()
          return result
      }
 
+     private fun getAllFinishedSudokuFields(): List<SudokuField> {
+         val result: MutableList<SudokuField> = mutableListOf()
+
+         for (row in solvedSudoku.sudokuFields) {
+             for (field in row) {
+                 result.add(field)
+             }
+         }
+         return result
+     }
+
      fun getSudokuFieldById(_id: Int): SudokuField? = getAllSudokuFields().firstOrNull {
+         it.index == _id
+     }
+
+     fun getFinishedSudokuFieldById(_id: Int): SudokuField? = getAllFinishedSudokuFields().firstOrNull {
          it.index == _id
      }
 
@@ -68,6 +91,26 @@ fun createListOfSudokuFields(): MutableList<MutableList<SudokuField>> {
     return sudoku
 }
 
+//val unsolvedAndSolvedSudoku: String = "080790010\n" +
+//        "900000705\n" +
+//        "000000040\n" +
+//        "200070000\n" +
+//        "100906002\n" +
+//        "000030004\n" +
+//        "030000000\n" +
+//        "504000006\n" +
+//        "060018030\t\t\t\t\t\t\t\n" +
+//        "\t\t\t\t\t\t\n" +
+//        "485792613\n" +
+//        "916483725\n" +
+//        "327165948\n" +
+//        "259874361\n" +
+//        "143956872\n" +
+//        "678231594\n" +
+//        "831649257\n" +
+//        "594327186\n" +
+//        "762518439"
+
 private class BoxedSudoku(val sudoku: Sudoku) {
     override fun equals(other: Any?): Boolean = false
 
@@ -75,3 +118,4 @@ private class BoxedSudoku(val sudoku: Sudoku) {
         return sudoku.hashCode()
     }
 }
+
