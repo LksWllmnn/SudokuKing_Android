@@ -2,6 +2,8 @@ package com.example.sudokuking.domain.model
 
 class Sudoku private constructor(
     val title: String,
+    var isSolved: SolvedState,
+    var wrongNumbers: List<Int>,
     val sudokuFields: MutableList<MutableList<SudokuField>>
 ) {
     override fun equals(other: Any?): Boolean {
@@ -19,9 +21,15 @@ class Sudoku private constructor(
     companion object {
         fun create(
             title: String,
+            isSolved: SolvedState,
+            wrongNumbers: List<Int>,
             sudokuFields: MutableList<MutableList<SudokuField>>
         ): Sudoku {
-            return Sudoku(title, sudokuFields)
+            return Sudoku(title, isSolved, wrongNumbers, sudokuFields)
         }
     }
+}
+
+enum class SolvedState {
+    Correct, Wrong, NotSolved
 }

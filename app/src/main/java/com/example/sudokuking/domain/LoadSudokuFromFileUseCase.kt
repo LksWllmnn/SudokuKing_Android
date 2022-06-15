@@ -12,27 +12,26 @@ class LoadSudokuFromFileUseCase {
         try {
             var result = context.resources.openRawResource(R.raw.sudoku).bufferedReader().use{it.readText()}
 
-            for(i in 0..9) {
-                for(j in (0+i)..(9+i)) {
-                    var field = sudokuRepo.getSudokuFieldById(i*10+j-i)
-                    if (field != null) {
-                        if (result[i*10+j].toString() == "0") {
-                            field.number = ""
-                            field.isFixed = false
-                        }
-                        else {
-                            field.number = result[i*10+j].toString()
-                            field.isFixed = true
-                        }
+            result
+
+            var counter = 0
+            for(i in 0..8) {
+                for(j in 0..8) {
+                    var field = sudokuRepo.getSudokuFieldById(i*10+j)
+                    if(field != null) {
+                        field.number = result[counter].toString()
+                        counter++
                     }
                 }
             }
 
-            for(i in 10..18) {
+            var counter2 = 83
+            for(i in 0..8) {
                 for(j in 0..8) {
-                    var field = sudokuRepo.getFinishedSudokuFieldById((i-10)*10+j)
+                    var field = sudokuRepo.getFinishedSudokuFieldById(i*10+j)
                     if (field != null) {
-                        field.number = result[i*10+j].toString()
+                        field.number = result[counter2].toString()
+                        counter2++
                     }
                 }
             }

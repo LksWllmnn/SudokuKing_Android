@@ -15,16 +15,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sudokuking.domain.model.SolvedState
 import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
 fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded, viewModel::onCheckSudoku)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Context) -> Unit, isLoaded:Boolean) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Context) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit) {
     if(!isLoaded) {
         onLoadSudoku(LocalContext.current)
     }
@@ -33,21 +34,33 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
-    ) {
+        )
+    {
         val scrollState = rememberLazyListState()
-        Column()
-         {
-             LazyColumn(
-                state = scrollState,
-                modifier = Modifier
-                .height(LocalConfiguration.current.screenWidthDp.dp)
-            ) {
-                items(sudokus) {sudoku ->
+        Column() {
+            LazyColumn(state = scrollState,
+            modifier = Modifier.height(LocalConfiguration.current.screenWidthDp.dp)) {
+                items(sudokus) { sudoku ->
                     SudokuItem(sudoku = sudoku, selectField)
+                    if(sudoku.isSolved == SolvedState.Wrong) {
+                        Card() {
+                            Text("Das war leider falsch: " + sudoku.wrongNumbers)
+                        }
+                    } else if (sudoku.isSolved == SolvedState.Correct) {
+                        Card() {
+                            Text("Das ist richtig!: " + sudoku.wrongNumbers)
+                        }
+                    }
                 }
             }
-             NumbFieldItem( setNumb, deleteNumb )
+            Row() {
+                NumbFieldItem( setNumb, deleteNumb )
+                Button(onClick = { onCheckSudoku() }) {
+                    Text(text = "Check Sudoku")
+                }
+            }
         }
+
     }
 }
 
