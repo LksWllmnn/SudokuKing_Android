@@ -9,7 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,9 +23,12 @@ import com.example.sudokuking.feature.navigation.BottomNavigationItem.Statistics
 import com.example.sudokuking.feature.navigation.BottomNavigationItem.Game
 import com.example.sudokuking.feature.navigation.MainBottomNavigation
 import com.example.sudokuking.feature.navigation.MainNavigationGraph
+import com.example.sudokuking.feature.sudoku.SudokuNavigationItem
+import com.example.sudokuking.feature.ui.AppViewModel
 
 @Composable
 fun MainScreen() {
+
     MainScreenUI()
 }
 
@@ -45,6 +50,9 @@ fun MainScreenUI() {
                         AccountNavigationItem.Login.routeName -> Text("Account - Login")
                         AccountNavigationItem.Register.routeName -> Text("Account - Register")
                         AccountNavigationItem.LoggedIn.routeName -> Text("Account - Your Account")
+                        SudokuNavigationItem.Game.routeName -> Text("Game - Play")
+                        SudokuNavigationItem.SelectType.routeName -> Text("Game - Select Type")
+                        SudokuNavigationItem.SelectTypeUnranked.routeName -> Text("Game - Select Difficulty")
                     }
                 },
             )

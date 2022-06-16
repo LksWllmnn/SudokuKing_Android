@@ -25,10 +25,10 @@ fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Context) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit) {
-    if(!isLoaded) {
-        onLoadSudoku(LocalContext.current)
-    }
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Int) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit) {
+    //if(!isLoaded) {
+    //    onLoadSudoku(LocalContext.current)
+    //}
     Card(
         elevation = 3.dp,
         modifier = Modifier

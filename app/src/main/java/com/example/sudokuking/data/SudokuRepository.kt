@@ -13,6 +13,8 @@ val sudokuRepo = SudokuRepository()
 
 class SudokuRepository @Inject constructor()
  {
+     var allSudokuString = ""
+
      private val currentSudoku = MutableStateFlow(
          BoxedSudoku(Sudoku.create("test",SolvedState.NotSolved, mutableListOf(),createListOfSudokuFields()))
      )
@@ -102,3 +104,8 @@ private class BoxedSudoku(val sudoku: Sudoku) {
     }
 }
 
+sealed class SudokusLoadedState {
+    object SudokusNotLoaded : SudokusLoadedState()
+
+    object SudokusLoaded: SudokusLoadedState()
+}

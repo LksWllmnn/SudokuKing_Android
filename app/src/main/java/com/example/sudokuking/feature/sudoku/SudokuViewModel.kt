@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.sudokuking.domain.*
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.sudokuking.domain.model.Sudoku
 import com.example.sudokuking.domain.model.SudokuField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -48,9 +46,9 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    fun onLoadSudoku(context: Context) {
+    fun onLoadSudoku(stage:Int) {
         viewModelScope.launch {
-            LoadSudokuFromFileUseCase()(context)
+            LoadSudokuFromFileUseCase()(stage)
         }
         this.isLoaded = true
     }

@@ -5,7 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.sudokuking.feature.account.*
 import com.example.sudokuking.feature.statistic.StatisticScreen
+import com.example.sudokuking.feature.sudoku.SudokuNavigationItem
 import com.example.sudokuking.feature.sudoku.SudokuScreen
+import com.example.sudokuking.feature.sudoku.SudokuSelectDifficultyScreen
+import com.example.sudokuking.feature.sudoku.SudokuSelectTypeScreen
 
 @Composable
 fun MainNavigationGraph(navController: NavHostController) {
@@ -15,12 +18,11 @@ fun MainNavigationGraph(navController: NavHostController) {
             AccountScreen(navController)
         }
         composable(BottomNavigationItem.Game.routeName) {
-            SudokuScreen()
+            SudokuSelectTypeScreen(navController = navController)
         }
         composable(BottomNavigationItem.Statistics.routeName) {
             StatisticScreen()
         }
-
 
         //Account
         composable(AccountNavigationItem.NotLoggedIn.routeName) {
@@ -37,6 +39,15 @@ fun MainNavigationGraph(navController: NavHostController) {
 
         composable(AccountNavigationItem.LoggedIn.routeName) {
             LoggedInScreen(navController = navController)
+        }
+
+        //Sudoku
+        composable(SudokuNavigationItem.SelectTypeUnranked.routeName) {
+            SudokuSelectDifficultyScreen(navController = navController)
+        }
+
+        composable(SudokuNavigationItem.Game.routeName) {
+            SudokuScreen()
         }
     }
 }
