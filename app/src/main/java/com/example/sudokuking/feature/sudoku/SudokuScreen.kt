@@ -20,7 +20,6 @@ import androidx.navigation.NavHostController
 import com.example.sudokuking.domain.model.SudokuField
 import com.example.sudokuking.R
 import com.example.sudokuking.data.sudokuRepo
-import com.example.sudokuking.domain.UpdateGameTimeUseCase
 import com.example.sudokuking.domain.model.SolvedState
 
 @Composable

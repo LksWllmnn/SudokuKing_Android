@@ -19,6 +19,15 @@ class Statistic private constructor(
         return true
     }
 
+    override fun hashCode(): Int {
+        var result = title.hashCode()
+        result = 31 * result + resolved
+        result = 31 * result + unresolved
+        result = 31 * result + average.hashCode()
+        result = 31 * result + best.hashCode()
+        return result
+    }
+
     companion object {
         fun create(
             title: String,

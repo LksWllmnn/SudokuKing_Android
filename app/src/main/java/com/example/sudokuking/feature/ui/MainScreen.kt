@@ -1,4 +1,4 @@
-package com.example.sudokuking.feature
+package com.example.sudokuking.feature.ui
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -9,9 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +22,6 @@ import com.example.sudokuking.feature.navigation.BottomNavigationItem.Game
 import com.example.sudokuking.feature.navigation.MainBottomNavigation
 import com.example.sudokuking.feature.navigation.MainNavigationGraph
 import com.example.sudokuking.feature.sudoku.SudokuNavigationItem
-import com.example.sudokuking.feature.ui.AppViewModel
 
 @Composable
 fun MainScreen() {

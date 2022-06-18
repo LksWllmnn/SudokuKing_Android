@@ -23,7 +23,7 @@ fun NotLoggedInScreen (navController: NavHostController) {
         Card(modifier = Modifier
             .padding(5.dp)
             .fillMaxWidth()) {
-            Column() {
+            Column {
                 Text(
                     text = "You are not Logged In",
                     modifier = Modifier

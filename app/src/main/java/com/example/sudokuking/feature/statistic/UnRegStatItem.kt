@@ -20,7 +20,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)) {
-        Column() {
+        Column {
             Text(text = statistic.title, fontSize = 20.sp)
 
             Box(modifier = Modifier
@@ -50,7 +50,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
             ) {
                 Box(modifier = Modifier
                     .padding(0.dp, 0.dp,10.dp,0.dp )) {
-                    Row() {
+                    Row {
                         Icon(painter = painterResource(R.drawable.ic_baseline_alarm_off_24), contentDescription = "Average")
                         Text(text =  "" + statistic.average)
                     }
@@ -58,7 +58,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                 }
                 Box(modifier = Modifier
                     .padding(0.dp, 0.dp,10.dp,0.dp )) {
-                    Row() {
+                    Row {
                         Text(text =  "Best:" + statistic.best)
                     }
                 }

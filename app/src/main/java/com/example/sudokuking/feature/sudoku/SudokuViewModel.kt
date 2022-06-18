@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SudokuViewModel @Inject constructor(): ViewModel() {
-    var isLoaded: Boolean = false
+    private var isLoaded: Boolean = false
 
     fun bindUI(context: Context): LiveData<List<SudokuUI>> =
         liveData {

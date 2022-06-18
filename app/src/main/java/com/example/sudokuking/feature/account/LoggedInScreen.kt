@@ -22,7 +22,7 @@ fun LoggedInScreen(navController: NavHostController) {
         Card(modifier = Modifier
             .padding(5.dp)
             .fillMaxWidth()) {
-            Column() {
+            Column {
                 Text(
                     text = "Account",
                     modifier = Modifier

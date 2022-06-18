@@ -10,7 +10,6 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.sudokuking.ui.theme.SudokuKingTheme
-import com.example.sudokuking.feature.MainScreen
 
 class MainActivity: ComponentActivity() {
     private val viewModel: AppViewModel by viewModels()
@@ -19,7 +18,7 @@ class MainActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             viewModel.onPreLoadAllSudokus(LocalContext.current)
-            SudokuKingTheme() {
+            SudokuKingTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     MainScreen()
                 }

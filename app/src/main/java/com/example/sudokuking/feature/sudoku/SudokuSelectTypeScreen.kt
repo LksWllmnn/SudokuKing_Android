@@ -1,6 +1,5 @@
 package com.example.sudokuking.feature.sudoku
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable

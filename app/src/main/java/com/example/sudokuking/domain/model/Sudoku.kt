@@ -18,6 +18,14 @@ class Sudoku private constructor(
         return true
     }
 
+    override fun hashCode(): Int {
+        var result = title.hashCode()
+        result = 31 * result + isSolved.hashCode()
+        result = 31 * result + wrongNumbers.hashCode()
+        result = 31 * result + sudokuFields.hashCode()
+        return result
+    }
+
     companion object {
         fun create(
             title: String,

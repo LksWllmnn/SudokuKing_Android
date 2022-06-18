@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class CheckSudokuUseCase {
     suspend operator fun invoke(): Boolean = withContext(Dispatchers.Default) {
-        var wrongIndexed: MutableList<Int> = mutableListOf()
+        val wrongIndexed: MutableList<Int> = mutableListOf()
 
         for (i in 0..9) {
             for (j in (0+i)..(9+i)) {

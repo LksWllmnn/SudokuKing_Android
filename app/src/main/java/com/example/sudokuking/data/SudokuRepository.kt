@@ -91,7 +91,7 @@ fun createListOfSudokuFields(): MutableList<MutableList<SudokuField>> {
     val sudoku: MutableList<MutableList<SudokuField>> = mutableListOf()
 
     for (rows in 0..8) {
-        var sudokuRow: MutableList <SudokuField> = mutableListOf()
+        val sudokuRow: MutableList <SudokuField> = mutableListOf()
         for(columns in 0..8) {
             if (columns%2 == 0) sudokuRow.add(SudokuField.create(isSelected = false,notes = listOf(1,2), index = rows * 10 + columns, number =(rows * 10 + columns).toString(), isFixed = false))
             else sudokuRow.add(SudokuField.create(isSelected = false,notes = listOf(1,2), index = rows * 10 + columns, number =(rows * 10 + columns).toString(), isFixed = true))
@@ -107,10 +107,4 @@ private class BoxedSudoku(val sudoku: Sudoku) {
     override fun hashCode(): Int {
         return sudoku.hashCode()
     }
-}
-
-sealed class SudokusLoadedState {
-    object SudokusNotLoaded : SudokusLoadedState()
-
-    object SudokusLoaded: SudokusLoadedState()
 }

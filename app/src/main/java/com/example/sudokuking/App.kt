@@ -32,37 +32,8 @@ class App : Application() {
             }
             .build()
 
-        /*webService = Retrofit.Builder()
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor(
-                        HttpLoggingInterceptor {
-                            Log.d("OKHTTP", it)
-                        }.apply { level = HttpLoggingInterceptor.Level.BODY }
-                    )
-                    .addInterceptor { chain ->
-                        val credentials = runBlocking {
-                            when (val state = userSettingsRepo.getSettings().loginState) {
-                                is LoginState.LoggedIn -> state.credentials
-                                LoginState.LoggedOut -> ""
-                                is LoginState.LoggingIn -> state.credentials
-                                else -> LoginState.LoggedOut
-                            }
-                        }
-                        val request = chain.request().newBuilder()
-                            .addHeader("Authorization", "Basic $credentials")
-                            .build()
-                        chain.proceed(request)
-                    }
-                    .build()
-            )
-            .baseUrl(WebService.BASE_URL)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-            .build()
-            .create(WebService::class.java)*/
-
         runBlocking {
-            //database.statisticDao().deleteAll()
+            database.statisticDao().deleteAll()
             InitializeStatisticUseCase(statisticRepo)()
         }
     }

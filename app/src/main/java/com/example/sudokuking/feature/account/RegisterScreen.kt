@@ -30,7 +30,7 @@ fun RegisterScreen(navController: NavHostController) {
         Card(modifier = Modifier
             .padding(5.dp)
             .fillMaxWidth()) {
-            Column() {
+            Column {
                 Text(
                     text = "Register",
                     modifier = Modifier
