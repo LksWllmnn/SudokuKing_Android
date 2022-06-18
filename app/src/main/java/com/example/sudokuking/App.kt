@@ -1,22 +1,16 @@
 package com.example.sudokuking
 
 import android.app.Application
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.example.sudokuking.data.database.AppDatabase
-import com.example.sudokuking.data.network.WebService
+import com.example.sudokuking.data.gameResultRepo
 import com.example.sudokuking.data.statisticRepo
-import com.example.sudokuking.domain.InitializeStatisticUseCase
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.example.sudokuking.domain.ComputeGameResultsUseCase
+import com.example.sudokuking.domain.InitialiseGameResultsUseCase
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
 
 
 class App : Application() {
@@ -33,8 +27,10 @@ class App : Application() {
             .build()
 
         runBlocking {
-            database.statisticDao().deleteAll()
-            InitializeStatisticUseCase(statisticRepo)()
+            //database.statisticDao().deleteAll()
+            //InitializeStatisticUseCase(statisticRepo)()
+            //database.gameResultsDao().deleteAll()
+            ComputeGameResultsUseCase()()
         }
     }
 

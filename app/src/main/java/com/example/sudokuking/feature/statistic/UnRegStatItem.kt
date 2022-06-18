@@ -52,7 +52,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                     .padding(0.dp, 0.dp,10.dp,0.dp )) {
                     Row {
                         Icon(painter = painterResource(R.drawable.ic_baseline_alarm_off_24), contentDescription = "Average")
-                        Text(text =  "" + statistic.average)
+                        Text(text =  "" + statistic.averageOut)
                     }
 
                 }
@@ -70,5 +70,5 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
 @Preview
 @Composable
 fun UnRegStatItem_Preview() {
-    UnRegStatItem(UnRegStatsUI("easy", 50, 50, 13.2f, 5.0f))
+    UnRegStatItem(UnRegStatsUI("easy", 50, 50, 13, "5", 2,2))
 }

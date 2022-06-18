@@ -5,12 +5,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
-        StatisticDb::class
+        //StatisticDb::class
+        GameResultDb::class
     ],
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun statisticDao(): StatisticDao
+    //abstract fun statisticDao(): StatisticDao
+    abstract fun gameResultsDao(): GameResultDao
 }

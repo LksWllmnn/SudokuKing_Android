@@ -4,6 +4,8 @@ class UnRegStatsUI (
     val title: String,
     val resolved: Int,
     val unresolved: Int,
-    val average: Float,
-    val best: Float
+    val average: Long,
+    val averageOut: String,
+    val best: Long,
+    val amount: Int
 )

@@ -3,10 +3,12 @@ package com.example.sudokuking.domain.model
 
 class Statistic private constructor(
     val title: String,
-    val resolved: Int,
-    val unresolved: Int,
-    val average: Float,
-    val best: Float
+    var resolved: Int,
+    var unresolved: Int,
+    var average: Long,
+    var best: Long,
+    var amount: Int,
+    val gameResults: MutableList<GameResult>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -25,6 +27,7 @@ class Statistic private constructor(
         result = 31 * result + unresolved
         result = 31 * result + average.hashCode()
         result = 31 * result + best.hashCode()
+        result = 31 * result + amount.hashCode()
         return result
     }
 
@@ -33,10 +36,12 @@ class Statistic private constructor(
             title: String,
             resolved: Int,
             unresolved: Int,
-            average: Float,
-            best: Float
+            average: Long,
+            best: Long,
+            amount: Int,
+            gameResults: MutableList<GameResult>
         ): Statistic {
-            return Statistic(title, resolved, unresolved, average, best)
+            return Statistic(title, resolved, unresolved, average, best, amount, gameResults)
         }
     }
 }

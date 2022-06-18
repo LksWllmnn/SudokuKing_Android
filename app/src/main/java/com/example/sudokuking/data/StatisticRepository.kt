@@ -1,31 +1,60 @@
 package com.example.sudokuking.data
 
-import com.example.sudokuking.App
-import com.example.sudokuking.data.database.StatisticDao
-import com.example.sudokuking.data.database.statisticFromDb
-import com.example.sudokuking.data.database.statisticToDb
+import com.example.sudokuking.domain.model.GameResult
 import com.example.sudokuking.domain.model.Statistic
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-import kotlinx.coroutines.flow.map
 
-val statisticRepo = StatisticRepository(App.database.statisticDao())
+val statisticRepo = StatisticRepository()
 
 class StatisticRepository @Inject constructor(
-    private val dao: StatisticDao,
 ) {
-
-    suspend fun getAllStatistics(): List<Statistic> = dao.getAll().map{ statisticFromDb(it) }
-
-    suspend fun observeAllStatistics(): Flow<List<Statistic>> = dao.observeAll().map { it.mapNotNull(::statisticFromDb) }
-
-    suspend fun addStatistic(statistic: Statistic) {
-        dao.insert(
-            statisticToDb(statistic)
+    private var allStatistics: List<Statistic> = listOf(
+        Statistic.create(
+            title = "easy",
+            resolved = 0,
+            unresolved = 0,
+            average = 0,
+            best = 0,
+            amount = 0,
+            gameResults = mutableListOf()
+        ),
+        Statistic.create(
+            title = "medium",
+            resolved = 0,
+            unresolved = 0,
+            average = 0,
+            best = 0,
+            amount = 0,
+            gameResults = mutableListOf()
+        ),
+        Statistic.create(
+            title = "hard",
+            resolved = 0,
+            unresolved = 0,
+            average = 0,
+            best = 0,
+            amount = 0,
+            gameResults = mutableListOf()
         )
+    )
+    fun getAllStatistics(): List<Statistic> {
+        return allStatistics
     }
 
-    suspend fun deleteAll() {
-        dao.deleteAll()
-    }
+    //suspend fun getAllStatistics(): List<Statistic> {
+    //    this.allStatistics =  dao.getAll().map{ statisticFromDb(it) }
+    //    return allStatistics
+    //}
+
+    //suspend fun addStatistic(statistic: Statistic) {
+    //    dao.insert(
+    //        statisticToDb(statistic)
+    //    )
+    //}
+
+    //suspend fun deleteAll() {
+    //    dao.deleteAll()
+    //}
+
+
 }

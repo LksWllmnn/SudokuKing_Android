@@ -1,6 +1,7 @@
 package com.example.sudokuking.domain.model
 
 class GameResult private constructor(
+    val id: String,
     val solved: Boolean,
     val time: Long,
     val difficulty: String,
@@ -30,12 +31,13 @@ class GameResult private constructor(
 
     companion object {
         fun create(
+            id: String,
             solved: Boolean,
             time: Long,
             difficulty: String,
             sudokuFileLineNumber: Int
         ): GameResult {
-            return GameResult(solved,time,difficulty,sudokuFileLineNumber)
+            return GameResult(id, solved,time,difficulty,sudokuFileLineNumber)
         }
     }
 }
