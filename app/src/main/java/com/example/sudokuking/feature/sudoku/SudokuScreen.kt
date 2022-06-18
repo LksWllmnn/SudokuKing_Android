@@ -19,15 +19,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sudokuking.domain.model.SudokuField
 import com.example.sudokuking.R
+import com.example.sudokuking.data.sudokuRepo
+import com.example.sudokuking.domain.UpdateGameTimeUseCase
+import com.example.sudokuking.domain.model.SolvedState
 
 @Composable
 fun SudokuScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded, viewModel::onCheckSudoku, viewModel::onFinishSolved, viewModel::onContinueAfterWrong, navController)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onCheckSudoku, viewModel::onFinishSolved, viewModel::onContinueAfterWrong, navController, viewModel::onUpdateGameTime)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Int) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit, onFinish:() -> Unit, onContinueAfterWrong:() -> Unit, navController: NavHostController) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onCheckSudoku:()-> Unit, onFinish:() -> Unit, onContinueAfterWrong:() -> Unit, navController: NavHostController, onUpdateGameTime:() -> Unit) {
+    sudokus.forEach { sudoku ->
+        if (sudoku.isSolved == SolvedState.NotSolved) {
+            onUpdateGameTime()
+        }
+    }
     Card(
         elevation = 3.dp,
         modifier = Modifier
@@ -37,7 +45,7 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
         )
     {
         val scrollState = rememberLazyListState()
-        Column() {
+        Column {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -45,10 +53,10 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box() {
-                    Row() {
+                Box {
+                    Row {
                         Icon(painterResource(id = R.drawable.ic_baseline_timer_24), contentDescription = "Running Time")
-                        Text("00:00")
+                        Text(sudokuRepo.runningTimeOut)
                     }
                 }
                 Button(onClick = { onCheckSudoku() }) {

@@ -70,5 +70,11 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
             ContinueAfterWrongUseCase()()
         }
     }
+
+    fun onUpdateGameTime() {
+        viewModelScope.launch {
+            UpdateGameTimeUseCase()()
+        }
+    }
 }
 

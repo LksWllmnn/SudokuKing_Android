@@ -53,6 +53,7 @@ class LoadSudokuFromFileUseCase {
                 }
             }
             sudokuRepo.isASudokuRunning = true
+            sudokuRepo.startTime = System.currentTimeMillis()
             return@withContext true
         }catch (e: Exception) {
             return@withContext false
