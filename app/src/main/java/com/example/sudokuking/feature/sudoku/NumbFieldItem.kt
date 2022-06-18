@@ -1,70 +1,37 @@
 package com.example.sudokuking.feature.sudoku
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
-fun NumbFieldItem(setNumb: (number: Int) -> Unit, deleteNumb: () -> Unit) {
-    Column() {
-        Row() {
-            Button(
-                onClick = { setNumb(1) }
-            ) {
-                Text(text = "1")
-            }
-            Button(
-                onClick = { setNumb(2) }) {
-                Text(text = "2")
-            }
-            Button(
-                onClick = { setNumb(3) }) {
-                Text(text = "3")
-            }
-        }
-        Row() {
-            Button(
-                onClick = { setNumb(4) }) {
-                Text(text = "4")
-            }
-            Button(
-                onClick = { setNumb(5) }) {
-                Text(text = "5")
-            }
-            Button(
-                onClick = { setNumb(6) }) {
-                Text(text = "6")
-            }
-        }
-        Row() {
-            Button(
-                onClick = { setNumb(7) }) {
-                Text(text = "7")
-            }
-            Button(
-                onClick = { setNumb(8) }) {
-                Text(text = "8")
-            }
-            Button(
-                onClick = { setNumb(9) }) {
-                Text(text = "9")
-            }
-        }
-        Row(horizontalArrangement = Arrangement.Center) {
-            Button(
-                onClick = { deleteNumb() }) {
-                Text(text = "✕")
-            }
-        }
+fun NumbFieldItem(setNumb: (number: Int) -> Unit, number: Int) {
+    Box (
+        modifier= Modifier
+            .shadow(5.dp)
+            .background(MaterialTheme.colors.primaryVariant)
+            .width(40.dp)
+            .height(40.dp)
+            .clickable { setNumb(number) },
+    )
+    {
+        Text(
+            modifier = Modifier
+                .align(alignment = Alignment.Center),
+            text = "" + number,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.secondary,
+        )
+
     }
-}
-
-@Preview
-@Composable
-fun NumbFieldItem_Preview() {
 }

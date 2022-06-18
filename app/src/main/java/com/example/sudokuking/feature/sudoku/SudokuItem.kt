@@ -109,10 +109,9 @@ fun SudokuItem(sudoku: SudokuUI, selectField: (SudokuField) -> Unit) {
                                 }
                             }
                         }
+                        //BoardGrid(tileOffset = tileOffset, boundary = 9)
                     }
-
                 }
-
             }
         }
     }
