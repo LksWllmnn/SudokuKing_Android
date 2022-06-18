@@ -1,6 +1,5 @@
 package com.example.sudokuking.feature.sudoku
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.Button
@@ -15,21 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.sudokuking.domain.model.SolvedState
+import androidx.navigation.NavHostController
 import com.example.sudokuking.domain.model.SudokuField
 import com.example.sudokuking.R
 
 @Composable
-fun SudokuScreen(viewModel: SudokuViewModel = viewModel()) {
+fun SudokuScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded, viewModel::onCheckSudoku)
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onLoadSudoku, viewModel.isLoaded, viewModel::onCheckSudoku, viewModel::onFinishSolved, viewModel::onContinueAfterWrong, navController)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Int) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onLoadSudoku:(Int) -> Unit, isLoaded:Boolean, onCheckSudoku:()-> Unit, onFinish:() -> Unit, onContinueAfterWrong:() -> Unit, navController: NavHostController) {
     Card(
         elevation = 3.dp,
         modifier = Modifier
@@ -40,7 +38,6 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
     {
         val scrollState = rememberLazyListState()
         Column() {
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -57,7 +54,6 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
                 Button(onClick = { onCheckSudoku() }) {
                     Text(text = "Check Sudoku")
                 }
-
             }
 
             LazyColumn(state = scrollState,
@@ -72,11 +68,5 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
             NumbFieldContainerItem( setNumb, deleteNumb )
         }
     }
-    CheckedPopUpItem(sudokus = sudokus)
-}
-
-@Preview
-@Composable
-fun SudokuScreen_Preview() {
-    SudokuScreen()
+    CheckedPopUpItem(sudokus = sudokus, onFinish, onContinueAfterWrong, navController)
 }

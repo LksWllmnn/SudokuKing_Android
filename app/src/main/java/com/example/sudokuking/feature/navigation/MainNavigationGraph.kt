@@ -42,12 +42,16 @@ fun MainNavigationGraph(navController: NavHostController) {
         }
 
         //Sudoku
+        composable(SudokuNavigationItem.SelectType.routeName) {
+            SudokuSelectTypeScreen(navController = navController)
+        }
+
         composable(SudokuNavigationItem.SelectTypeUnranked.routeName) {
             SudokuSelectDifficultyScreen(navController = navController)
         }
 
         composable(SudokuNavigationItem.Game.routeName) {
-            SudokuScreen()
+            SudokuScreen(navController = navController)
         }
     }
 }

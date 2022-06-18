@@ -58,5 +58,17 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
             CheckSudokuUseCase()()
         }
     }
+
+    fun onFinishSolved() {
+        viewModelScope.launch {
+            FinishSolvedUseCase()()
+        }
+    }
+
+    fun onContinueAfterWrong() {
+        viewModelScope.launch {
+            ContinueAfterWrongUseCase()()
+        }
+    }
 }
 

@@ -15,6 +15,8 @@ class SudokuRepository @Inject constructor()
  {
      var allSudokuString = ""
 
+     var isASudokuRunning: Boolean = false
+
      private val currentSudoku = MutableStateFlow(
          BoxedSudoku(Sudoku.create("test",SolvedState.NotSolved, mutableListOf(),createListOfSudokuFields()))
      )

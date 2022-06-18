@@ -33,7 +33,7 @@ class LoadSudokuFromFileUseCase {
                         val loadedNum = allSudoku[counter].toString()
                         if(loadedNum == "0") {
                             field.isFixed = false
-                            field.number = loadedNum
+                            field.number = ""
                         } else {
                             field.isFixed = true
                             field.number = loadedNum
@@ -52,6 +52,7 @@ class LoadSudokuFromFileUseCase {
                     }
                 }
             }
+            sudokuRepo.isASudokuRunning = true
             return@withContext true
         }catch (e: Exception) {
             return@withContext false
