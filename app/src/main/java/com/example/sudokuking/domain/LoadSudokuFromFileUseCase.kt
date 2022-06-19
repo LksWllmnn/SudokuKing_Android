@@ -9,19 +9,8 @@ class LoadSudokuFromFileUseCase {
         try {
             val allSudoku = sudokuRepo.allSudokuString
 
-            var counter = 0
-            var counter2 = 83
-
-            if(stage == 0) {
-                counter = 0
-                counter2 = 83
-            } else if(stage == 1) {
-                counter = 166
-                counter2 = 249
-            } else if(stage == 2) {
-                counter = 332
-                counter2 = 415
-            }
+            var counter = getLines(stage)
+            var counter2 = counter + 83
 
             for(i in 0..8) {
                 for(j in 0..8) {
@@ -55,5 +44,24 @@ class LoadSudokuFromFileUseCase {
         }catch (e: Exception) {
             return@withContext false
         }
+    }
+
+    private fun getLines(stage: Int): Int {
+        var counter = 0
+        when(stage){
+            0 -> {
+                counter = 0
+            }
+            1 -> {
+                counter = 166
+            }
+            2 -> {
+                counter = 332
+            }
+            else -> {
+                getLines(0)
+            }
+        }
+        return counter
     }
 }

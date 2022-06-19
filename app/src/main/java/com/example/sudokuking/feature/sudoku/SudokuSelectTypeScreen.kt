@@ -3,27 +3,46 @@ package com.example.sudokuking.feature.sudoku
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sudokuking.data.sudokuRepo
+import com.example.sudokuking.domain.model.SudokuField
 
 @Composable
-fun SudokuSelectTypeScreen(navController: NavHostController) {
+fun SudokuSelectTypeScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
+    val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
+    SudokuSelectTypeScreenUI(sudoku, navController, viewModel::onGiveUp, viewModel::onAttemptGiveUp, viewModel::onDontGiveUp, viewModel::onLoadSudoku)
+}
+
+@Composable
+fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostController, giveUp: () -> Unit, attemptGiveUp: () -> Unit, dontGiveUp:() -> Unit, onLoadSudoku:(stage:Int) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(10.dp)
-
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
-                onClick = { navController.navigate(SudokuNavigationItem.Game.routeName) },
+                onClick =
+                {
+
+                    if(sudokuRepo.isASudokuRunning) {
+                        attemptGiveUp()
+                    } else {
+                        onLoadSudoku(4)
+                        navController.navigate(SudokuNavigationItem.Game.routeName)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth(0.75f)
                     .height(50.dp),
@@ -32,7 +51,14 @@ fun SudokuSelectTypeScreen(navController: NavHostController) {
                 Text(text = "Play Ranked")
             }
             Button(
-                onClick = { navController.navigate(SudokuNavigationItem.SelectTypeUnranked.routeName) },
+                onClick =
+                {
+                    if(sudokuRepo.isASudokuRunning) {
+                        attemptGiveUp()
+                    } else {
+                        navController.navigate(SudokuNavigationItem.SelectTypeUnranked.routeName)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth(0.75f)
                     .height(50.dp)
@@ -60,6 +86,9 @@ fun SudokuSelectTypeScreen(navController: NavHostController) {
                 }
             }
 
+        }
+        if(sudokuRepo.attemptToGiveUp) {
+            GiveUpLastGamePopUp(giveUp, dontGiveUp)
         }
     }
 }

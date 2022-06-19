@@ -13,7 +13,7 @@ class ComputeGameResultsUseCase {
         return@withContext true
     }
 
-    suspend fun calcAllGameResults() {
+    private suspend fun calcAllGameResults() {
         val allGameResults: List<GameResult> = gameResultRepo.getAllGameResults()
         allGameResults.forEach { gameResult ->
             when (gameResult.difficulty) {
@@ -47,12 +47,12 @@ class ComputeGameResultsUseCase {
         var timeSum: Long = 0
         statistic.best = statistic.gameResults[0].time
         statistic.gameResults.forEach{gameResult ->
-            timeSum += gameResult.time
-            if(gameResult.time < statistic.best) statistic.best = gameResult.time
+            if(gameResult.solved) timeSum += gameResult.time
+            if(gameResult.time < statistic.best && gameResult.solved) statistic.best = gameResult.time
             if(gameResult.solved) counterResolved++
         }
-        statistic.average = timeSum/statistic.amount
-        statistic.resolved = (counterResolved / statistic.amount) * 100
+        statistic.average = timeSum/counterResolved
+        statistic.resolved = (counterResolved * 100/statistic.amount)
         statistic.unresolved = 100 - statistic.resolved
     }
 }

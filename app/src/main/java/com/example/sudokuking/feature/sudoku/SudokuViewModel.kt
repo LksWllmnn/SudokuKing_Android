@@ -76,5 +76,23 @@ class SudokuViewModel @Inject constructor(): ViewModel() {
             UpdateGameTimeUseCase()()
         }
     }
+
+    fun onGiveUp() {
+        viewModelScope.launch {
+            GiveUpGameUseCase()()
+        }
+    }
+
+    fun onAttemptGiveUp() {
+        viewModelScope.launch {
+            OpenGiveUpPopUpUseCase()()
+        }
+    }
+
+    fun onDontGiveUp() {
+        viewModelScope.launch {
+            CloseGiveUpPopUpUseCase()()
+        }
+    }
 }
 
