@@ -5,11 +5,13 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -19,14 +21,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sudokuking.R
+import com.example.sudokuking.data.accountRepo
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+@Composable
+fun LoginScreen(viewModel: AccountViewModel = viewModel(), navController: NavHostController) {
+    val account by viewModel.bindUI(LocalContext.current).observeAsState()
+    LoginScreenUI(account, navController, viewModel::onCheckInputs )
+}
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkInputs:(String, String)-> Unit) {
     Column(modifier = Modifier
         .padding(5.dp)
         .fillMaxWidth()
-        .fillMaxHeight(),
+        .fillMaxHeight(0.9f),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -68,7 +78,7 @@ fun LoginScreen(navController: NavHostController) {
                     keyboardActions = KeyboardActions(
                         onDone = {
                             focusManager.clearFocus()
-                            navController.navigate(AccountNavigationItem.LoggedIn.routeName)
+                            checkInputs(username, password)
                         }
                     ),
                     modifier = Modifier.onKeyEvent {
@@ -81,5 +91,9 @@ fun LoginScreen(navController: NavHostController) {
                 )
             }
         }
+
+    }
+    if(accountRepo.inputsWereChecked) {
+        LoggInInputsWereCheckedPopUpItem(accountRepo.isLoggedIn,navController)
     }
 }

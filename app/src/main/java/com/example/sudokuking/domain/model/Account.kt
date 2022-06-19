@@ -2,15 +2,11 @@ package com.example.sudokuking.domain.model
 
 import java.time.ZonedDateTime
 
-@JvmInline
-value class AccountId(val value: String)
-
 class Account private constructor(
-    val id: AccountId,
-    val username: String,
-    val password: String,
+    var id: String,
+    var username: String,
+    var password: String,
     val created: ZonedDateTime,
-    val updated: ZonedDateTime,
     val deleted: ZonedDateTime,
 ) {
     override fun equals(other: Any?): Boolean {
@@ -30,15 +26,12 @@ class Account private constructor(
 
     companion object {
         fun create(
-            id: AccountId,
+            id: String,
             username: String,
             password: String
-
-        ): Account? {
-            if (username.isBlank()) return null
-            if (password.isBlank()) return null
+        ): Account {
             val now = ZonedDateTime.now()
-            return Account(id, username, password, now, now, now)
+            return Account(id, username, password, now, now)
         }
     }
 }
