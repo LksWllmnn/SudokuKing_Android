@@ -26,7 +26,9 @@
     <string name="account_repeatPassword_placeholder">User Name</string>
     <string name="account_headline_loggedIn">Account</string>
     <string name="account_loggOut_Button">Logout</string>
-    <string name="account_deleteAccount_Button">Logout</string>
+    <string name="account_deleteAccount_Button">Delete Account</string>
+    <string name="account_Username_label">Username</string>
+    <string name="account_Password_label">Password</string>
 
     <string name="statistic_unregisteredStats_Title">Unregistered</string>
     <string name="statistic_registeredStats_Title">Registered</string>

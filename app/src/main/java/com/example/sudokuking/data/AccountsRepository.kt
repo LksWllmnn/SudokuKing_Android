@@ -7,6 +7,8 @@ val accountRepo = AccountsRepository()
 
 class AccountsRepository {
 
+    var isLoggedIn = false
+
     private val allAccounts = listOf(
         Account.create(
             id = AccountId("61ae7e7c-7d78-4db5-aab6-0408fac95d40"),
