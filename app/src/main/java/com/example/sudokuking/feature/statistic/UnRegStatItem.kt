@@ -21,27 +21,42 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
             .fillMaxWidth()
             .padding(5.dp)) {
         Column {
-            Text(text = statistic.title, fontSize = 20.sp)
+            Text(text = "Mode " + statistic.title, fontSize = 20.sp)
 
             Box(modifier = Modifier
                 .fillMaxWidth()) {
-                Box(modifier = Modifier
-                    .padding(0.dp, 1.dp)
-                    .background(Color.Green)
-                    .fillMaxWidth()
-                ) {
-                    Text(text = stringResource(id = R.string.statistic_resolved) + ": " + statistic.resolved + "%")
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Box(modifier = Modifier.fillMaxWidth(0.3f)) {
+                        Text(text = stringResource(id = R.string.statistic_resolved) + ": ")
+                    }
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier
+                            .background(Color.Green)
+                            .padding(0.dp, 1.dp)
+                            .fillMaxWidth((statistic.resolved).toFloat() / 100)
+                        ) {
+                            Text(text = "" + statistic.resolved + "%")
+                        }
+                    }
                 }
             }
             Box(modifier = Modifier
                 .fillMaxWidth()) {
-                Box(modifier = Modifier
-                    .padding(0.dp, 1.dp)
-                    .background(Color.Red)
-                    .fillMaxWidth()
-                ) {
-                    Text(text = stringResource(id = R.string.statistic_unresolved) + ": " + statistic.unresolved + "%")
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Box(modifier = Modifier.fillMaxWidth(0.3f)) {
+                        Text(text = stringResource(id = R.string.statistic_unresolved) + ": ")
+                    }
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier
+                            .background(Color.Red)
+                            .padding(0.dp, 1.dp)
+                            .fillMaxWidth((statistic.unresolved).toFloat() / 100)
+                        ) {
+                            Text("" + statistic.unresolved + "%")
+                        }
+                    }
                 }
+
             }
             Row(
                 horizontalArrangement = Arrangement.Start,
@@ -59,7 +74,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                 Box(modifier = Modifier
                     .padding(0.dp, 0.dp,10.dp,0.dp )) {
                     Row {
-                        Text(text =  "Best:" + statistic.best)
+                        Text(text =  "Best:" + statistic.bestOut)
                     }
                 }
             }
@@ -70,5 +85,5 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
 @Preview
 @Composable
 fun UnRegStatItem_Preview() {
-    UnRegStatItem(UnRegStatsUI("easy", 50, 50, 13, "5", 2,2))
+    UnRegStatItem(UnRegStatsUI("easy", 30,70, 50, "13", 5, 2, "5"))
 }

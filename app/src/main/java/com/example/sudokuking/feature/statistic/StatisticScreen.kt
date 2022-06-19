@@ -54,7 +54,7 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>) {
                         .padding(5.dp)
                 ) {
                     items(statistics) { statistic ->
-                        UnRegStatItem(statistic)
+                        if(statistic.amount > 0) UnRegStatItem(statistic)
                     }
                 }
             }

@@ -21,24 +21,25 @@ class StatisticViewModel @Inject constructor(): ViewModel() {
                     average = statistic.average,
                     best = statistic.best,
                     amount = statistic.amount,
-                    averageOut = computeAverageOutput(statistic.average)
+                    averageOut = computeLongToOutput(statistic.average),
+                    bestOut = computeLongToOutput(statistic.best),
                 )
             }
             emit(result)
         }
 
-    private fun computeAverageOutput(average:Long): String {
+    private fun computeLongToOutput(num:Long): String {
         var result: String = ""
-        if (((average)/60) < 10) {
-            if (((average)%60) < 10) {
-                result = "0" +((average)/60) + ":0" + ((average)%60)
+        if (((num)/60) < 10) {
+            if (((num)%60) < 10) {
+                result = "0" +((num)/60) + ":0" + ((num)%60)
             } else {
-                result = "0" +((average)/60) + ":" + ((average)%60)
+                result = "0" +((num)/60) + ":" + ((num)%60)
             }
-        } else if (((average)%60) < 10) {
-            result = "" + ((average)/60) + ":0" + ((average)%60)
+        } else if (((num)%60) < 10) {
+            result = "" + ((num)/60) + ":0" + ((num)%60)
         } else {
-            result = "" + ((average)/60) + ":" + ((average)%60)
+            result = "" + ((num)/60) + ":" + ((num)%60)
         }
         return result
     }

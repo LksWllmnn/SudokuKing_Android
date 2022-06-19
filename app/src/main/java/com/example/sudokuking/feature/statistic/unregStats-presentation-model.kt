@@ -7,5 +7,6 @@ class UnRegStatsUI (
     val average: Long,
     val averageOut: String,
     val best: Long,
-    val amount: Int
+    val amount: Int,
+    val bestOut: String
 )
