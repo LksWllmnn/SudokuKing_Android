@@ -7,9 +7,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.sudokuking.R
 
 @Composable
 fun SudokuSelectDifficultyScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
@@ -39,7 +41,7 @@ fun SudokuSelectDifficultyScreenUI(navController: NavHostController, onLoadSudok
                     navController.navigate(SudokuNavigationItem.Game.routeName)
                 }
             ) {
-                Text(text = "Easy")
+                Text(text = stringResource(R.string.sudoku_difficulty_easy))
             }
             Button(
                 modifier = Modifier
@@ -51,7 +53,7 @@ fun SudokuSelectDifficultyScreenUI(navController: NavHostController, onLoadSudok
                     navController.navigate(SudokuNavigationItem.Game.routeName)
                 }
             ) {
-                Text(text = "Medium")
+                Text(text = stringResource(R.string.sudoku_difficulty_medium))
             }
             Button(
                 modifier = Modifier
@@ -63,7 +65,7 @@ fun SudokuSelectDifficultyScreenUI(navController: NavHostController, onLoadSudok
                     navController.navigate(SudokuNavigationItem.Game.routeName)
                 }
             ) {
-                Text(text = "Hard")
+                Text(text = stringResource(R.string.sudoku_difficulty_hard))
             }
         }
     }

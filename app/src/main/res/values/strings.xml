@@ -10,6 +10,13 @@
     <string name="sudoku_difficulty_hard">Hard</string>
     <string name="sudoku_difficulty_medium">Medium</string>
     <string name="sudoku_difficulty_easy">Hard</string>
+    <string name="sudoku_giveUpQuestion">Do you really want to give up your last game and start a new one?</string>
+    <string name="sudoku_giveUpButton">Give Up</string>
+    <string name="sudoku_dontGiveUpButton">Don\'t Give Up</string>
+    <string name="sudoku_thisWasWrong">This was false: </string>
+    <string name="sudoku_understoodWrong">Understood</string>
+    <string name="sudoku_thisWasRight">This was right!</string>
+    <string name="sudoku_understoodRight">Finish</string>
 
     <string name="account_not_logged_in">You are not logged in</string>
     <string name="account_loggIn_button">Login</string>
@@ -24,8 +31,8 @@
     <string name="statistic_unregisteredStats_Title">Unregistered</string>
     <string name="statistic_registeredStats_Title">Registered</string>
     <string name="statistic_difficulty_easy_title">Easy</string>
-    <string name="statistic_difficulty_medium_title">Easy</string>
-    <string name="statistic_difficulty_hard_title">Easy</string>
+    <string name="statistic_difficulty_medium_title">Medium</string>
+    <string name="statistic_difficulty_hard_title">Hard</string>
     <string name="statistic_resolved">resolved</string>
     <string name="statistic_unresolved">unresolved</string>
     <string name="statistic_registered_rank">Rank</string>

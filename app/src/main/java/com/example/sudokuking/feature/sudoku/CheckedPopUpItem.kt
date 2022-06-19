@@ -7,8 +7,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.sudokuking.R
 import com.example.sudokuking.domain.model.SolvedState
 
 @Composable
@@ -31,7 +33,7 @@ fun CheckedPopUpItem(sudokus:List<SudokuUI>, onFinish:() -> Unit, onContinueAfte
                 ) {
                     if (sudoku.isSolved == SolvedState.Wrong) {
                         Text(
-                            text = "Das war leider falsch: " + sudokus[0].wrongNumbers,
+                            text = stringResource(id = R.string.sudoku_thisWasWrong) + sudokus[0].wrongNumbers,
                             modifier = Modifier
                                 .padding(10.dp),
                         )
@@ -40,11 +42,11 @@ fun CheckedPopUpItem(sudokus:List<SudokuUI>, onFinish:() -> Unit, onContinueAfte
                             modifier = Modifier
                                 .padding(10.dp),
                         ) {
-                            Text(text = "Verstanden")
+                            Text(text = stringResource(id = R.string.sudoku_understoodWrong))
                         }
                     } else if (sudoku.isSolved == SolvedState.Correct) {
                         Text(
-                            text = "Das ist richtig!: " + sudokus[0].wrongNumbers,
+                            text = stringResource(id = R.string.sudoku_thisWasRight),
                             modifier = Modifier
                                 .padding(10.dp),
                         )
@@ -57,7 +59,7 @@ fun CheckedPopUpItem(sudokus:List<SudokuUI>, onFinish:() -> Unit, onContinueAfte
                             modifier = Modifier
                                 .padding(10.dp),
                         ) {
-                            Text(text = "Beenden")
+                            Text(text = stringResource(id = R.string.sudoku_understoodRight))
                         }
                     }
                 }

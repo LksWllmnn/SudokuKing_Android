@@ -8,6 +8,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.sudokuking.R
 
 @Composable
 fun GiveUpLastGamePopUp(giveUp:() -> Unit, dontGiveUp: () -> Unit) {
@@ -17,15 +19,15 @@ fun GiveUpLastGamePopUp(giveUp:() -> Unit, dontGiveUp: () -> Unit) {
             .fillMaxHeight()
     ) {
         Column() {
-            Text(text = "Do you really want to give up your last game and start a new one?")
+            Text(text = stringResource(id = R.string.sudoku_giveUpQuestion))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { giveUp() }) {
-                Text(text = "Give Up")
+                Text(text = stringResource(id = R.string.sudoku_giveUpButton))
             }
             Button(
                 onClick = { dontGiveUp() }) {
-                Text(text = "Don't Give Up")
+                Text(text = stringResource(id = R.string.sudoku_dontGiveUpButton))
             }
         }
 

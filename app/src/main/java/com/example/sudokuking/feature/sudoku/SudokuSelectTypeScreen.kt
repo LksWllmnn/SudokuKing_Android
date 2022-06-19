@@ -8,11 +8,12 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sudokuking.data.sudokuRepo
-import com.example.sudokuking.domain.model.SudokuField
+import com.example.sudokuking.R
 
 @Composable
 fun SudokuSelectTypeScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
@@ -48,7 +49,7 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
                     .height(50.dp),
 
             ) {
-                Text(text = "Play Ranked")
+                Text(text = stringResource(R.string.sudoku_gameType_ranked))
             }
             Button(
                 onClick =
@@ -63,7 +64,7 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
                     .fillMaxWidth(0.75f)
                     .height(50.dp)
             ) {
-                Text(text = "Play Unranked")
+                Text(text = stringResource(R.string.sudoku_gameType_unranked))
             }
             if(sudokuRepo.isASudokuRunning) {
                 Button(
@@ -72,7 +73,7 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
                         .fillMaxWidth(0.75f)
                         .height(50.dp)
                 ) {
-                    Text(text = "Continue Game")
+                    Text(text = stringResource(R.string.sudoku_gameType_continue))
                 }
             } else {
                 Button(
@@ -82,7 +83,7 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
                         .height(50.dp),
                     colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
                 ) {
-                    Text(text = "Continue Game")
+                    Text(text = stringResource(R.string.sudoku_gameType_continue))
                 }
             }
 
