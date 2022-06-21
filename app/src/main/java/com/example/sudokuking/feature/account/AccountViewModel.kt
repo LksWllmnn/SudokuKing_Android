@@ -35,8 +35,10 @@ class AccountViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    fun deleteAccount() {
-        viewModelScope.launch {  }
+    fun onDeleteAccount() {
+        viewModelScope.launch {
+            DeleteAccountUseCase()()
+        }
     }
 
     fun onRegister(name: String, password: String) {

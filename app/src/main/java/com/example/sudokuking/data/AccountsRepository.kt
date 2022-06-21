@@ -53,4 +53,10 @@ class AccountsRepository @Inject constructor(
             accountToDb(account)
         )
     }
+
+    suspend fun deleteAccount(_account: Account) {
+        dao.delete(
+            accountToDb(_account)
+        )
+    }
 }

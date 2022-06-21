@@ -15,15 +15,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.sudokuking.domain.model.Account
 
 @Composable
 fun LoggedInScreen(viewModel: AccountViewModel = viewModel(), navController: NavHostController) {
     val account by viewModel.bindUI(LocalContext.current).observeAsState()
-    LoggedInScreenUi(navController, account, viewModel::onLoggOut)
+    LoggedInScreenUi(navController, account, viewModel::onLoggOut, viewModel::onDeleteAccount)
 }
 
 @Composable
-fun LoggedInScreenUi(navController: NavHostController, account: AccountUI?, loggOut:() -> Unit) {
+fun LoggedInScreenUi(navController: NavHostController, account: AccountUI?, loggOut:() -> Unit, deleteAccount:() -> Unit) {
     Column(
         modifier = Modifier
             .padding(5.dp)
@@ -73,7 +74,11 @@ fun LoggedInScreenUi(navController: NavHostController, account: AccountUI?, logg
         }
 
         Button(
-            onClick = { navController.navigate(AccountNavigationItem.NotLoggedIn.routeName) },
+            onClick =
+            {
+                deleteAccount()
+                navController.navigate(AccountNavigationItem.NotLoggedIn.routeName)
+            },
             modifier = Modifier
                 .padding(5.dp)
                 .fillMaxWidth(0.75f)
