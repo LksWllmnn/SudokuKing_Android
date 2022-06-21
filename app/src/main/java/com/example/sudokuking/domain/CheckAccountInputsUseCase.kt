@@ -12,6 +12,7 @@ class CheckAccountInputsUseCase {
         if(repoResult != null) {
             val originAccount: Account = repoResult
             if (originAccount.password == password) {
+                accountRepo.setActiveAccount(originAccount)
                 accountRepo.isLoggedIn = true
             } else {
                 return@withContext false

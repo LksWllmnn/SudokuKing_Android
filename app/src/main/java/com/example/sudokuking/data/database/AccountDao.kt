@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 abstract class AccountDao {
     @Insert
-    abstract suspend fun insert(GameResult: AccountDb)
+    abstract suspend fun insert(account: AccountDb)
 
     @Query("SELECT * FROM account")
     abstract suspend fun getAll(): List<AccountDb>

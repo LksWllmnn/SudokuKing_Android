@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.example.sudokuking.domain.CheckAccountInputsUseCase
-import com.example.sudokuking.domain.GetActiveAccountUseCase
-import com.example.sudokuking.domain.GetAllAccountsUseCase
-import com.example.sudokuking.domain.LoggOutUseCase
+import androidx.navigation.NavController
+import com.example.sudokuking.domain.*
 import com.example.sudokuking.domain.model.Account
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,17 +15,11 @@ class AccountViewModel @Inject constructor(): ViewModel() {
     fun bindUI(context: Context): LiveData<AccountUI?> =
         liveData {
             val resultAccount = GetActiveAccountUseCase()()
-            var result: AccountUI = AccountUI("","")
+            var result = AccountUI("","")
             if (resultAccount != null) {
                 result.id = resultAccount.id
                 result.name = resultAccount.username
             }
-            //val result = GetAllAccountsUseCase()().map { account ->
-            //    AccountUI(
-            //        id = account.id,
-            //        name = account.username
-            //    )
-            //}
             emit(result)
         }
 
@@ -45,5 +37,17 @@ class AccountViewModel @Inject constructor(): ViewModel() {
 
     fun deleteAccount() {
         viewModelScope.launch {  }
+    }
+
+    fun onRegister(name: String, password: String) {
+        viewModelScope.launch {
+            RegisterAccountUseCase()(name, password)
+        }
+    }
+
+    fun onCloseRegisterPopUp() {
+        viewModelScope.launch {
+            CloseRegisterPopUpUseCase()()
+        }
     }
 }

@@ -1,12 +1,22 @@
 package com.example.sudokuking.data
 
+import com.example.sudokuking.App
+import com.example.sudokuking.data.database.*
 import com.example.sudokuking.domain.model.Account
+import com.example.sudokuking.domain.model.GameResult
+import javax.inject.Inject
 
-val accountRepo = AccountsRepository()
+val accountRepo = AccountsRepository(App.database.accountDao())
 
-class AccountsRepository {
+class AccountsRepository @Inject constructor(
+    private val dao: AccountDao
+    ) {
+
     var isLoggedIn = false
     var inputsWereChecked = false
+
+    var accountIsRegistered = false
+    var usernameAlreadyExists: Boolean = false
 
     private var activeAccount: Account? = null
 
@@ -18,15 +28,29 @@ class AccountsRepository {
         )
     ).filterNotNull()
 
-    suspend fun getAllAccounts() = allAccounts
+    suspend fun getAllAccounts(): List<Account?> {
+        return dao.getAll().map { account ->
+            accountFromDb(account)
+        }
+    }
 
     fun getActiveAccount() = activeAccount
+
+    fun setActiveAccount(_account: Account) {
+        activeAccount = _account
+    }
 
     suspend fun getAccountById(id: String): Account? = allAccounts.firstOrNull {
         it.id == id
     }
 
-    fun getAccountByName(name: String): Account? = allAccounts.firstOrNull{
-            it.username == name
+    suspend fun getAccountByName(name: String): Account? = getAllAccounts().firstOrNull{
+            it?.username == name
+    }
+
+    suspend fun addAccount(account: Account) {
+        dao.insert(
+            accountToDb(account)
+        )
     }
 }
