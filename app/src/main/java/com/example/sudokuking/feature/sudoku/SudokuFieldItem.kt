@@ -30,7 +30,7 @@ fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color,
         Column {
             Box(modifier = Modifier
                 .width(tileOffset.dp)
-                .height((tileOffset*0.7).dp)
+                .height((tileOffset*1.0).dp)
             ) {
                 var fontWeight = FontWeight.Normal
                 if(sudokuField.isFixed) fontWeight = FontWeight.ExtraBold
@@ -43,12 +43,14 @@ fun SudokuFieldItem(sudokuField: SudokuField, boxColor: Color, textColor: Color,
                   fontWeight = fontWeight
                 )
             }
-            Box(modifier = Modifier
-                .height((tileOffset*0.3).dp)
 
-            ) {
-                Text(text = ""  + sudokuField.notes,fontSize = 10.sp)
-            }
+            //TODO: Make Noteation Function in Future
+            //Box(modifier = Modifier
+            //       .height((tileOffset*0.3).dp)
+            //
+            //     {
+            //        Text(text = ""  + sudokuField.notes,fontSize = 10.sp)
+            //    }
         }
     }
 }
