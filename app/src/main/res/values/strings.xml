@@ -9,7 +9,7 @@
     <string name="sudoku_gameType_continue">Continue Game</string>
     <string name="sudoku_difficulty_hard">Hard</string>
     <string name="sudoku_difficulty_medium">Medium</string>
-    <string name="sudoku_difficulty_easy">Hard</string>
+    <string name="sudoku_difficulty_easy">Easy</string>
     <string name="sudoku_giveUpQuestion">Do you really want to give up your last game and start a new one?</string>
     <string name="sudoku_giveUpButton">Give Up</string>
     <string name="sudoku_dontGiveUpButton">Don\'t Give Up</string>

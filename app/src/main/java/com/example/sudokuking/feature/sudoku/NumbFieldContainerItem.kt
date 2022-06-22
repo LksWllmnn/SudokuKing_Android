@@ -1,17 +1,14 @@
 package com.example.sudokuking.feature.sudoku
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sudokuking.R
 
 @Composable
 fun NumbFieldContainerItem(setNumb: (number: Int) -> Unit, deleteNumb: () -> Unit) {
@@ -22,43 +19,26 @@ fun NumbFieldContainerItem(setNumb: (number: Int) -> Unit, deleteNumb: () -> Uni
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp),
+                .padding(5.dp, 0.dp, 5.dp, 5.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Box (
-                modifier= Modifier
-                    .shadow(5.dp)
-                    .background(MaterialTheme.colors.secondary)
-                    .width(60.dp)
-                    .height(40.dp)
-                    .clickable {  },
-            )
-            {
-                Text(
-                    modifier = Modifier
-                        .align(alignment = Alignment.Center),
-                    text = "Note",
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colors.primary,
-                )
-            }
-            Box (
-                modifier= Modifier
-                    .shadow(5.dp)
-                    .background(MaterialTheme.colors.secondary)
+            //TODO: Making Notes in Future
+            //Image(
+            //        painter = painterResource(R.drawable.pencil),
+            //        contentDescription = "pencil",
+            //        modifier = Modifier
+            //            .width(40.dp)
+            //            .height(40.dp)
+            //            .clickable { }
+            //    )
+            Image(
+                painter = painterResource(R.drawable.erasor),
+                contentDescription = "erase",
+                modifier = Modifier
                     .width(40.dp)
                     .height(40.dp)
-                    .clickable { deleteNumb() },
+                    .clickable { deleteNumb() }
             )
-            {
-                Text(
-                    modifier = Modifier
-                        .align(alignment = Alignment.Center),
-                    text = "✕",
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colors.primary,
-                )
-            }
         }
 
         Row(
