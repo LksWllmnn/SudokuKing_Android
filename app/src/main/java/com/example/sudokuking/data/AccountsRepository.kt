@@ -36,6 +36,10 @@ class AccountsRepository @Inject constructor(
 
     fun getActiveAccount() = activeAccount
 
+    fun loggOutActiveAccount() {
+        activeAccount = null
+    }
+
     fun setActiveAccount(_account: Account) {
         activeAccount = _account
     }

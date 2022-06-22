@@ -19,15 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sudokuking.R
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sudokuking.feature.account.AccountUI
+import com.example.sudokuking.feature.account.AccountViewModel
 
 @Composable
-fun StatisticScreen(viewModel: StatisticViewModel = viewModel()) {
+fun StatisticScreen(viewModel: StatisticViewModel = viewModel(), viewModelAccount: AccountViewModel = viewModel()) {
     val statistics by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    StatisticScreenUI(statistics)
+    val account by viewModelAccount.bindUI(LocalContext.current).observeAsState()
+    StatisticScreenUI(statistics, account)
 }
 
 @Composable
-fun StatisticScreenUI(statistics: List<UnRegStatsUI>) {
+fun StatisticScreenUI(statistics: List<UnRegStatsUI>, account: AccountUI?) {
     Column(modifier = Modifier
         .padding(5.dp)) {
         Card(modifier = Modifier
@@ -74,12 +77,22 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>) {
                         fontSize = 25.sp
                     )
                 }
-                Box(modifier = Modifier
-                    .padding(5.dp)) {
-                    Text(
-                        text = stringResource(R.string.account_not_logged_in)
-                    )
+                if(account?.id == "") {
+                    Box(modifier = Modifier
+                        .padding(5.dp)) {
+                        Text(
+                            text = stringResource(R.string.account_not_logged_in)
+                        )
+                    }
+                } else {
+                    Box(modifier = Modifier
+                        .padding(5.dp)) {
+                        Text(
+                            text = "Hello" + account?.name
+                        )
+                    }
                 }
+
             }
         }
 

@@ -65,6 +65,8 @@ fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkIn
                     label = { Text(stringResource(id = R.string.account_Username_label)) },
                     singleLine = true,
                 )
+                
+                Text(text = "Account: " + account?.name)
 
                 val focusManager = LocalFocusManager.current
                 var password by remember { mutableStateOf("") }
@@ -77,8 +79,9 @@ fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkIn
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
                         onDone = {
-                            focusManager.clearFocus()
                             checkInputs(username, password)
+                            focusManager.clearFocus()
+
                         }
                     ),
                     modifier = Modifier.onKeyEvent {

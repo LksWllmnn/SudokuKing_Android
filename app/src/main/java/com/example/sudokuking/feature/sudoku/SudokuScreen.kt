@@ -24,15 +24,18 @@ import com.example.sudokuking.domain.model.SudokuField
 import com.example.sudokuking.R
 import com.example.sudokuking.data.sudokuRepo
 import com.example.sudokuking.domain.model.SolvedState
+import com.example.sudokuking.feature.account.AccountUI
+import com.example.sudokuking.feature.account.AccountViewModel
 
 @Composable
-fun SudokuScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
+fun SudokuScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController, viewModelAccount: AccountViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onCheckSudoku, viewModel::onFinishSolved, viewModel::onContinueAfterWrong, navController, viewModel::onUpdateGameTime)
+    val account by viewModelAccount.bindUI(LocalContext.current).observeAsState()
+    SudokuScreenUI(sudokus = sudoku, viewModel::onSelectField, viewModel::onSetNumber, viewModel::onDeleteNumber, viewModel::onCheckSudoku, viewModel::onFinishSolved, viewModel::onContinueAfterWrong, navController, viewModel::onUpdateGameTime, account)
 }
 
 @Composable
-fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onCheckSudoku:()-> Unit, onFinish:() -> Unit, onContinueAfterWrong:() -> Unit, navController: NavHostController, onUpdateGameTime:() -> Unit) {
+fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, setNumb: (Int) -> Unit, deleteNumb:() -> Unit, onCheckSudoku:()-> Unit, onFinish:() -> Unit, onContinueAfterWrong:() -> Unit, navController: NavHostController, onUpdateGameTime:() -> Unit, account: AccountUI?) {
     sudokus.forEach { sudoku ->
         if (sudoku.isSolved == SolvedState.NotSolved) {
             onUpdateGameTime()

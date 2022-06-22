@@ -14,15 +14,18 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sudokuking.data.sudokuRepo
 import com.example.sudokuking.R
+import com.example.sudokuking.feature.account.AccountUI
+import com.example.sudokuking.feature.account.AccountViewModel
 
 @Composable
-fun SudokuSelectTypeScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController) {
+fun SudokuSelectTypeScreen(viewModel: SudokuViewModel = viewModel(), navController: NavHostController, viewModelAccount: AccountViewModel = viewModel()) {
     val sudoku by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
-    SudokuSelectTypeScreenUI(sudoku, navController, viewModel::onGiveUp, viewModel::onAttemptGiveUp, viewModel::onDontGiveUp, viewModel::onLoadSudoku)
+    val account by viewModelAccount.bindUI(LocalContext.current).observeAsState()
+    SudokuSelectTypeScreenUI(sudoku, navController, viewModel::onGiveUp, viewModel::onAttemptGiveUp, viewModel::onDontGiveUp, viewModel::onLoadSudoku, account)
 }
 
 @Composable
-fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostController, giveUp: () -> Unit, attemptGiveUp: () -> Unit, dontGiveUp:() -> Unit, onLoadSudoku:(stage:Int) -> Unit) {
+fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostController, giveUp: () -> Unit, attemptGiveUp: () -> Unit, dontGiveUp:() -> Unit, onLoadSudoku:(stage:Int) -> Unit, account: AccountUI?) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,24 +36,36 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick =
-                {
+            if(account?.id != "") {
+                Button(
+                    onClick =
+                    {
+                        if(sudokuRepo.isASudokuRunning) {
+                            attemptGiveUp()
+                        } else {
+                            onLoadSudoku(4)
+                            navController.navigate(SudokuNavigationItem.Game.routeName)
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.75f)
+                        .height(50.dp),
 
-                    if(sudokuRepo.isASudokuRunning) {
-                        attemptGiveUp()
-                    } else {
-                        onLoadSudoku(4)
-                        navController.navigate(SudokuNavigationItem.Game.routeName)
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .height(50.dp),
-
-            ) {
-                Text(text = stringResource(R.string.sudoku_gameType_ranked))
+                    ) {
+                    Text(text = stringResource(R.string.sudoku_gameType_ranked))
+                }
+            } else {
+                Button(
+                    onClick = {  },
+                    modifier = Modifier
+                        .fillMaxWidth(0.75f)
+                        .height(50.dp),
+                    colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                    ) {
+                    Text(text = stringResource(R.string.sudoku_gameType_ranked))
+                }
             }
+
             Button(
                 onClick =
                 {
@@ -86,7 +101,6 @@ fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostCont
                     Text(text = stringResource(R.string.sudoku_gameType_continue))
                 }
             }
-
         }
         if(sudokuRepo.attemptToGiveUp) {
             GiveUpLastGamePopUp(giveUp, dontGiveUp)

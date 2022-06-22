@@ -9,6 +9,7 @@ import com.example.sudokuking.data.database.AppDatabase
 import com.example.sudokuking.data.gameResultRepo
 import com.example.sudokuking.data.statisticRepo
 import com.example.sudokuking.domain.ComputeGameResultsUseCase
+import com.example.sudokuking.domain.ComputeRegGameResultsUseCase
 import com.example.sudokuking.domain.InitialiseGameResultsUseCase
 import kotlinx.coroutines.runBlocking
 
@@ -31,6 +32,7 @@ class App : Application() {
             //InitializeStatisticUseCase(statisticRepo)()
             //database.gameResultsDao().deleteAll()
             ComputeGameResultsUseCase()()
+            ComputeRegGameResultsUseCase()()
         }
     }
 

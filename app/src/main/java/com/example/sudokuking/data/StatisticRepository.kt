@@ -1,6 +1,5 @@
 package com.example.sudokuking.data
 
-import com.example.sudokuking.domain.model.GameResult
 import com.example.sudokuking.domain.model.Statistic
 import javax.inject.Inject
 
@@ -40,21 +39,4 @@ class StatisticRepository @Inject constructor(
     fun getAllStatistics(): List<Statistic> {
         return allStatistics
     }
-
-    //suspend fun getAllStatistics(): List<Statistic> {
-    //    this.allStatistics =  dao.getAll().map{ statisticFromDb(it) }
-    //    return allStatistics
-    //}
-
-    //suspend fun addStatistic(statistic: Statistic) {
-    //    dao.insert(
-    //        statisticToDb(statistic)
-    //    )
-    //}
-
-    //suspend fun deleteAll() {
-    //    dao.deleteAll()
-    //}
-
-
 }
