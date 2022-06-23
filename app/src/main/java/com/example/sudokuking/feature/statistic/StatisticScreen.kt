@@ -25,12 +25,13 @@ import com.example.sudokuking.feature.account.AccountViewModel
 @Composable
 fun StatisticScreen(viewModel: StatisticViewModel = viewModel(), viewModelAccount: AccountViewModel = viewModel()) {
     val statistics by viewModel.bindUI(LocalContext.current).observeAsState(emptyList())
+    val regStatistics by viewModel.bindUIReg(LocalContext.current).observeAsState(emptyList())
     val account by viewModelAccount.bindUI(LocalContext.current).observeAsState()
-    StatisticScreenUI(statistics, account)
+    StatisticScreenUI(statistics,regStatistics, account)
 }
 
 @Composable
-fun StatisticScreenUI(statistics: List<UnRegStatsUI>, account: AccountUI?) {
+fun StatisticScreenUI(statistics: List<UnRegStatsUI>, regStatistics: List<UnRegStatsUI>, account: AccountUI?) {
     Column(modifier = Modifier
         .padding(5.dp)) {
         Card(modifier = Modifier
@@ -87,15 +88,25 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>, account: AccountUI?) {
                 } else {
                     Box(modifier = Modifier
                         .padding(5.dp)) {
-                        Text(
-                            text = "Hello" + account?.name
-                        )
+                        Column {
+                            Text(
+                                text = "Hello " + account?.id
+                            )
+                            val scrollState = rememberLazyListState()
+                            LazyColumn(
+                                state = scrollState,
+                                modifier = Modifier
+                                    .padding(5.dp)
+                            ) {
+                                items(regStatistics) { regStatistic ->
+                                    UnRegStatItem(regStatistic)
+                                }
+                            }
+                        }
                     }
                 }
-
             }
         }
-
     }
 }
 

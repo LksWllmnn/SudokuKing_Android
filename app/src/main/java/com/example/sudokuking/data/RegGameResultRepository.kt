@@ -12,7 +12,7 @@ val regGameResultRepo = RegGameResultRepository(App.database.regGameResultDao())
 class RegGameResultRepository @Inject constructor(
     private val dao: RegGameResultDao
 ) {
-    suspend fun getAllRegGameResults(): List<RegGameResult> = dao.getAll().map { regGameResultFromDb(it)}
+    private suspend fun getAllRegGameResults(): List<RegGameResult> = dao.getAll().map { regGameResultFromDb(it) }
 
     suspend fun addRegGameResult(gameResult: RegGameResult) {
         dao.insert(
@@ -22,5 +22,14 @@ class RegGameResultRepository @Inject constructor(
 
     suspend fun deleteAll() {
         dao.deleteAll()
+    }
+
+    suspend fun getAllRegGameResultsByAccId(_accId: String?): List<RegGameResult?> {
+        val result: MutableList<RegGameResult?> = mutableListOf()
+        getAllRegGameResults().map { regGameResult ->
+            if(regGameResult.accId == _accId) result.add(regGameResult)
+            //if(_accId == null) return listOf()
+        }
+        return getAllRegGameResults()
     }
 }

@@ -59,6 +59,7 @@ class LoadSudokuFromFileUseCase {
                 counter = 332
             }
             else -> {
+                sudokuRepo.isRegisteredGame = true
                 getLines(0)
             }
         }

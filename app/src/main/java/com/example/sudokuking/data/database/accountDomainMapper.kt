@@ -11,7 +11,7 @@ fun accountToDb(account: Account): AccountDb = AccountDb(
 
 )
 
-fun accountFromDb(account: AccountDb): Account? = Account.create(
+fun accountFromDb(account: AccountDb): Account = Account.create(
     id = account.id,
     username = account.username,
     password = account.password

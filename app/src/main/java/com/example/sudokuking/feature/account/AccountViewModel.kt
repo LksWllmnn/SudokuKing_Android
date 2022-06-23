@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.example.sudokuking.domain.*
-import com.example.sudokuking.domain.model.Account
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

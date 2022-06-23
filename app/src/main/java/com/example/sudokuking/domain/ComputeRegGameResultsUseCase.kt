@@ -1,11 +1,10 @@
 package com.example.sudokuking.domain
 
+import com.example.sudokuking.data.accountRepo
 import com.example.sudokuking.data.regGameResultRepo
 import com.example.sudokuking.data.regStatisticRepo
-import com.example.sudokuking.data.statisticRepo
 import com.example.sudokuking.domain.model.RegGameResult
 import com.example.sudokuking.domain.model.RegStatistic
-import com.example.sudokuking.domain.model.Statistic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,9 +15,9 @@ class ComputeRegGameResultsUseCase {
     }
 
     private suspend fun calcAllRegGameResults() {
-        val allRegGameResults: List<RegGameResult> = regGameResultRepo.getAllRegGameResults()
+        val allRegGameResults: List<RegGameResult?> = regGameResultRepo.getAllRegGameResultsByAccId(accountRepo.getActiveAccount()?.id)
         allRegGameResults.forEach { regGameResult ->
-            when (regGameResult.difficulty) {
+            when (regGameResult?.difficulty) {
                 "easy" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("easy"))
                 "medium" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("medium"))
                 "hard" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("hard"))

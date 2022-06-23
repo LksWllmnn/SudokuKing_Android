@@ -18,7 +18,7 @@ fun GiveUpLastGamePopUp(giveUp:() -> Unit, dontGiveUp: () -> Unit) {
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-        Column() {
+        Column {
             Text(text = stringResource(id = R.string.sudoku_giveUpQuestion))
             Button(
                 modifier = Modifier.fillMaxWidth(),

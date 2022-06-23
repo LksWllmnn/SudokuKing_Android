@@ -3,7 +3,7 @@ package com.example.sudokuking.domain.model
 class SudokuField private constructor(
     var isSelected: Boolean,
     val index: Int,
-    val notes: List<Int>?,
+    private val notes: List<Int>?,
     var number: String,
     var isFixed: Boolean
 ){

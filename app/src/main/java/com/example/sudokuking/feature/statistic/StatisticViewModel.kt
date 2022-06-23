@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.sudokuking.data.sudokuRepo
+import com.example.sudokuking.domain.GetRegStatisticUseCase
 import com.example.sudokuking.domain.GetStatisticUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,9 +27,25 @@ class StatisticViewModel @Inject constructor(): ViewModel() {
             }
             emit(result)
         }
+    fun bindUIReg(context: Context): LiveData<List<UnRegStatsUI>> =
+        liveData {
+            val result = GetRegStatisticUseCase()().map { regStatistic ->
+                UnRegStatsUI(
+                    title = regStatistic.title,
+                    resolved = regStatistic.resolved,
+                    unresolved = regStatistic.unresolved,
+                    average = regStatistic.average,
+                    best = regStatistic.best,
+                    amount = regStatistic.amount,
+                    averageOut = computeLongToOutput(regStatistic.average),
+                    bestOut = computeLongToOutput(regStatistic.best)
+                )
+            }
+            emit(result)
+        }
 
     private fun computeLongToOutput(num:Long): String {
-        var result: String = ""
+        var result = ""
         if (((num)/60) < 10) {
             if (((num)%60) < 10) {
                 result = "0" +((num)/60) + ":0" + ((num)%60)

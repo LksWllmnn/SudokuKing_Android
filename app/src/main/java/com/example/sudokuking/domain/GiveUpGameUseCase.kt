@@ -13,6 +13,7 @@ class GiveUpGameUseCase {
         sudokuRepo.getSudoku()[0].isSolved = SolvedState.NotSolved
         sudokuRepo.deselectSudokuFields()
         sudokuRepo.isASudokuRunning = false
+        sudokuRepo.isRegisteredGame = false
         gameResultRepo.addGameResult(GameResult.create(UUID.randomUUID().toString(),solved = false, time = sudokuRepo.runningTime, difficulty = "easy", sudokuFileLineNumber = 0))
         ComputeGameResultsUseCase()()
         sudokuRepo.attemptToGiveUp = false

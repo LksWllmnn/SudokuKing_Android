@@ -3,7 +3,6 @@ package com.example.sudokuking.data
 import com.example.sudokuking.App
 import com.example.sudokuking.data.database.*
 import com.example.sudokuking.domain.model.Account
-import com.example.sudokuking.domain.model.GameResult
 import javax.inject.Inject
 
 val accountRepo = AccountsRepository(App.database.accountDao())
@@ -44,7 +43,7 @@ class AccountsRepository @Inject constructor(
         activeAccount = _account
     }
 
-    suspend fun getAccountById(id: String): Account? = allAccounts.firstOrNull {
+    fun getAccountById(id: String): Account? = allAccounts.firstOrNull {
         it.id == id
     }
 

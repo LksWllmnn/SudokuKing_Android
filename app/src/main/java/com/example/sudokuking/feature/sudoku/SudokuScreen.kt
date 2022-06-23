@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -71,7 +70,9 @@ fun SudokuScreenUI(sudokus: List<SudokuUI>, selectField: (SudokuField) -> Unit, 
                         .width(52.dp)
                         .height(39.dp)
                         .shadow(5.dp)
-                        .clickable { onCheckSudoku() }
+                        .clickable {
+                            onCheckSudoku()
+                        }
                 )
             }
 

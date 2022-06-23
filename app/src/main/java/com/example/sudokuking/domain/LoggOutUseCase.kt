@@ -1,7 +1,6 @@
 package com.example.sudokuking.domain
 
 import com.example.sudokuking.data.accountRepo
-import com.example.sudokuking.domain.model.Account
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

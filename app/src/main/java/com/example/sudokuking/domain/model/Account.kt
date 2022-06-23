@@ -6,6 +6,7 @@ class Account private constructor(
     var id: String,
     var username: String,
     var password: String,
+    var regGameResult: MutableList<RegGameResult?>,
     val created: ZonedDateTime,
     val deleted: ZonedDateTime,
 ) {
@@ -31,7 +32,7 @@ class Account private constructor(
             password: String
         ): Account {
             val now = ZonedDateTime.now()
-            return Account(id, username, password, now, now)
+            return Account(id, username, password, mutableListOf(), now, now)
         }
     }
 }
