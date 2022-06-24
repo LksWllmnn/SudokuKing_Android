@@ -7,12 +7,16 @@ fun accountToDb(account: Account): AccountDb = AccountDb(
     username = account.username,
     password = account.password,
     created = account.created,
-    deleted = account.deleted
+    deleted = account.deleted,
+    rankTitle = account.rankTitle,
+    lineRank = account.lineRank
 
 )
 
 fun accountFromDb(account: AccountDb): Account = Account.create(
     id = account.id,
     username = account.username,
-    password = account.password
+    password = account.password,
+    rankTitle = account.rankTitle,
+    lineRank = account.lineRank
 )

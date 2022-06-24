@@ -27,18 +27,19 @@ class StatisticViewModel @Inject constructor(): ViewModel() {
             }
             emit(result)
         }
-    fun bindUIReg(context: Context): LiveData<List<UnRegStatsUI>> =
+    fun bindUIReg(context: Context): LiveData<RegStatUI> =
         liveData {
-            val result = GetRegStatisticUseCase()().map { regStatistic ->
-                UnRegStatsUI(
-                    title = regStatistic.title,
-                    resolved = regStatistic.resolved,
-                    unresolved = regStatistic.unresolved,
-                    average = regStatistic.average,
-                    best = regStatistic.best,
-                    amount = regStatistic.amount,
-                    averageOut = computeLongToOutput(regStatistic.average),
-                    bestOut = computeLongToOutput(regStatistic.best)
+            val resultRegStat = GetRegStatisticUseCase()()
+            var result = RegStatUI(0,0,0,"0",0,0, "0")
+            if(resultRegStat != null) {
+                result = RegStatUI(
+                    resolved = resultRegStat.resolved,
+                    unresolved = resultRegStat.unresolved,
+                    average = resultRegStat.average,
+                    best = resultRegStat.best,
+                    amount = resultRegStat.amount,
+                    averageOut = computeLongToOutput(resultRegStat.average),
+                    bestOut = computeLongToOutput(resultRegStat.best)
                 )
             }
             emit(result)

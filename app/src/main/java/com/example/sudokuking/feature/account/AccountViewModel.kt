@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.sudokuking.domain.*
+import com.example.sudokuking.domain.model.RankTitle
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,13 +14,24 @@ class AccountViewModel @Inject constructor(): ViewModel() {
     fun bindUI(context: Context): LiveData<AccountUI?> =
         liveData {
             val resultAccount = GetActiveAccountUseCase()()
-            var result = AccountUI("","")
+            var result = AccountUI("","", "")
             if (resultAccount != null) {
                 result.id = resultAccount.id
                 result.name = resultAccount.username
+                result.rankTitle = rankTitleToString(resultAccount.rankTitle)
             }
             emit(result)
         }
+
+    fun rankTitleToString(rankTitle: RankTitle): String {
+        return when (rankTitle) {
+            RankTitle.Bronze -> "Bronze"
+            RankTitle.Silver -> "Silver"
+            RankTitle.Gold -> "Gold"
+            RankTitle.Diamond -> "Diamond"
+            RankTitle.Finished -> "Finished"
+        }
+    }
 
     fun onCheckInputs(name:String, password: String) {
         viewModelScope.launch {

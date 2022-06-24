@@ -45,3 +45,7 @@ class Statistic private constructor(
         }
     }
 }
+
+enum class RankTitle {
+    Bronze, Silver, Gold, Diamond, Finished
+}

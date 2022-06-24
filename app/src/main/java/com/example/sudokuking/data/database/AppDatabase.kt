@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    version = 3,
+    version = 5,
     entities = [
         GameResultDb::class,
         AccountDb::class,

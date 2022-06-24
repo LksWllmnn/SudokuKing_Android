@@ -2,6 +2,7 @@ package com.example.sudokuking.domain
 
 import com.example.sudokuking.data.accountRepo
 import com.example.sudokuking.domain.model.Account
+import com.example.sudokuking.domain.model.RankTitle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -16,7 +17,7 @@ class RegisterAccountUseCase {
                 return@withContext false
             }
         }
-        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), _name, _password))
+        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), _name, _password, RankTitle.Bronze, 0))
         return@withContext true
         } catch (e: Exception) {
             return@withContext false

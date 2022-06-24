@@ -3,6 +3,7 @@ package com.example.sudokuking.data
 import com.example.sudokuking.App
 import com.example.sudokuking.data.database.*
 import com.example.sudokuking.domain.model.Account
+import com.example.sudokuking.domain.model.RankTitle
 import javax.inject.Inject
 
 val accountRepo = AccountsRepository(App.database.accountDao())
@@ -23,7 +24,9 @@ class AccountsRepository @Inject constructor(
         Account.create(
             id = "61ae7e7c-7d78-4db5-aab6-0408fac95d40",
             username = "test",
-            password = "123456"
+            password = "123456",
+            rankTitle = RankTitle.Bronze,
+            lineRank = 0
         )
     ).filterNotNull()
 

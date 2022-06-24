@@ -2,7 +2,6 @@ package com.example.sudokuking.domain.model
 
 class RegStatistic (
     val accountID: String,
-    val title: String,
     var resolved: Int,
     var unresolved: Int,
     var average: Long,
@@ -18,7 +17,6 @@ class RegStatistic (
         other as RegStatistic
 
         if (accountID != other.accountID) return false
-        if (title != other.title) return false
         if (resolved != other.resolved) return false
         if (unresolved != other.unresolved) return false
         if (average != other.average) return false
@@ -31,7 +29,6 @@ class RegStatistic (
 
     override fun hashCode(): Int {
         var result = accountID.hashCode()
-        result = 31 * result + title.hashCode()
         result = 31 * result + resolved
         result = 31 * result + unresolved
         result = 31 * result + average.hashCode()
@@ -44,7 +41,6 @@ class RegStatistic (
     companion object {
         fun create(
             accountID: String,
-            title: String,
             resolved: Int,
             unresolved: Int,
             average: Long,
@@ -52,7 +48,7 @@ class RegStatistic (
             amount: Int,
             regGameResults: MutableList<RegGameResult>
         ): RegStatistic {
-            return RegStatistic(accountID, title, resolved, unresolved, average, best, amount, regGameResults)
+            return RegStatistic(accountID, resolved, unresolved, average, best, amount, regGameResults)
         }
     }
 }

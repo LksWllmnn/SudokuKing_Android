@@ -7,6 +7,8 @@ class Account private constructor(
     var username: String,
     var password: String,
     var regGameResult: MutableList<RegGameResult?>,
+    var rankTitle: RankTitle,
+    var lineRank: Int,
     val created: ZonedDateTime,
     val deleted: ZonedDateTime,
 ) {
@@ -29,10 +31,12 @@ class Account private constructor(
         fun create(
             id: String,
             username: String,
-            password: String
+            password: String,
+            rankTitle: RankTitle,
+            lineRank: Int,
         ): Account {
             val now = ZonedDateTime.now()
-            return Account(id, username, password, mutableListOf(), now, now)
+            return Account(id, username, password, mutableListOf(), rankTitle, lineRank, now, now)
         }
     }
 }

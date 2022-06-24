@@ -17,22 +17,8 @@ class ComputeRegGameResultsUseCase {
     private suspend fun calcAllRegGameResults() {
         val allRegGameResults: List<RegGameResult?> = regGameResultRepo.getAllRegGameResultsByAccId(accountRepo.getActiveAccount()?.id)
         allRegGameResults.forEach { regGameResult ->
-            when (regGameResult?.difficulty) {
-                "easy" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("easy"))
-                "medium" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("medium"))
-                "hard" -> computeRegGameResultToStatistic(regGameResult, getRegStatWithSpecificDifficulty("hard"))
-            }
+            if(regGameResult != null) computeRegGameResultToStatistic(regGameResult, regStatisticRepo.getAllRegStatistics())
         }
-    }
-
-    private fun getRegStatWithSpecificDifficulty(difficulty: String): RegStatistic {
-        var result: RegStatistic = RegStatistic.create("","", 0,0,0,0, 0, mutableListOf())
-        regStatisticRepo.getAllRegStatistics().forEach { regStatistic ->
-            if(regStatistic.title == difficulty)
-                result = regStatistic
-            return regStatistic
-        }
-        return result
     }
 
     private fun computeRegGameResultToStatistic(_regGameResult: RegGameResult, regStatistic: RegStatistic) {
@@ -55,5 +41,9 @@ class ComputeRegGameResultsUseCase {
         regStatistic.average = timeSum/counterResolved
         regStatistic.resolved = (counterResolved * 100/regStatistic.amount)
         regStatistic.unresolved = 100 - regStatistic.resolved
+    }
+
+    private fun computeLineRank() {
+
     }
 }
