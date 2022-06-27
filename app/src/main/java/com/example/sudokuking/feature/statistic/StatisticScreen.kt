@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.getValue
@@ -32,10 +34,15 @@ fun StatisticScreen(viewModel: StatisticViewModel = viewModel(), viewModelAccoun
 
 @Composable
 fun StatisticScreenUI(statistics: List<UnRegStatsUI>, regStatistic: RegStatUI?, account: AccountUI?) {
-    Column(modifier = Modifier
-        .padding(5.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(5.dp)
+            .fillMaxHeight()
+    ) {
         Card(modifier = Modifier
-            .padding(5.dp)) {
+            .padding(5.dp),
+            backgroundColor = MaterialTheme.colors.secondary
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -55,17 +62,20 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>, regStatistic: RegStatUI?, 
                 LazyColumn(
                     state = scrollState,
                     modifier = Modifier
-                        .padding(5.dp)
+                        .padding(5.dp),
+
                 ) {
                     items(statistics) { statistic ->
-                        if(statistic.amount > 0) UnRegStatItem(statistic)
+                         UnRegStatItem(statistic)
                     }
                 }
             }
         }
 
         Card(modifier = Modifier
-            .padding(5.dp)) {
+            .padding(5.dp),
+            backgroundColor = MaterialTheme.colors.secondary
+        ) {
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(5.dp)) {
@@ -89,9 +99,6 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>, regStatistic: RegStatUI?, 
                     Box(modifier = Modifier
                         .padding(5.dp)) {
                         Column {
-                            Text(
-                                text = "Hello " + account?.name
-                            )
                             if(regStatistic != null && account != null)RegStatItem(regStatistic, account)
                         }
                     }

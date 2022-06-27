@@ -20,16 +20,16 @@ class ComputeGameResultsUseCase {
                 "easy" -> computeGameResultToStatistic(gameResult, getStatWithSpecificDifficulty("easy"))
                 "medium" -> computeGameResultToStatistic(gameResult, getStatWithSpecificDifficulty("medium"))
                 "hard" -> computeGameResultToStatistic(gameResult, getStatWithSpecificDifficulty("hard"))
+                else -> computeGameResultToStatistic(gameResult, getStatWithSpecificDifficulty("hard"))
             }
         }
     }
 
-    private fun getStatWithSpecificDifficulty(difficulty: String): Statistic {
+    private fun getStatWithSpecificDifficulty(_difficulty: String): Statistic {
         var result: Statistic = Statistic.create("", 0,0,0,0, 0, mutableListOf())
         statisticRepo.getAllStatistics().forEach { statistic ->
-            if(statistic.title == difficulty)
+            if(statistic.title == _difficulty)
                 result = statistic
-            return statistic
         }
         return result
     }
@@ -51,7 +51,7 @@ class ComputeGameResultsUseCase {
             if(gameResult.time < statistic.best && gameResult.solved) statistic.best = gameResult.time
             if(gameResult.solved) counterResolved++
         }
-        statistic.average = timeSum/counterResolved
+        if(counterResolved>0)statistic.average = timeSum/counterResolved
         statistic.resolved = (counterResolved * 100/statistic.amount)
         statistic.unresolved = 100 - statistic.resolved
     }

@@ -14,7 +14,7 @@ class CheckAccountInputsUseCase {
             if (originAccount.password == password) {
                 accountRepo.setActiveAccount(originAccount)
                 accountRepo.isLoggedIn = true
-                ComputeRegGameResultsUseCase()()
+                //ComputeRegGameResultsUseCase()()
             } else {
                 return@withContext false
             }

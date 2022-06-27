@@ -65,4 +65,8 @@ class AccountsRepository @Inject constructor(
             accountToDb(_account)
         )
     }
+
+    suspend fun updateAccount(_account: Account) {
+        dao.update(accountToDb(_account))
+    }
 }

@@ -1,16 +1,15 @@
 package com.example.sudokuking.feature.account
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.NativeKeyEvent
@@ -21,6 +20,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sudokuking.data.accountRepo
@@ -34,19 +34,31 @@ fun RegisterScreen(navController: NavHostController, viewModel: AccountViewModel
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RegisterScreenUI(account: AccountUI?, navController: NavHostController, register:(String, String) -> Unit, closePopUp: () -> Unit) {
-    Column(modifier = Modifier
-        .padding(5.dp)
-        .fillMaxWidth()
-        .fillMaxHeight()
-    ) {
-        Card(modifier = Modifier
+    Column(
+        modifier = Modifier
             .padding(5.dp)
-            .fillMaxWidth()) {
-            Column {
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Card(
+            modifier = Modifier
+                .padding(5.dp)
+                .fillMaxWidth()
+                .fillMaxHeight(0.75f),
+            backgroundColor = MaterialTheme.colors.secondary
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround) {
                 Text(
                     text = "Register",
                     modifier = Modifier
-                        .padding(5.dp)
+                        .padding(5.dp),
+                    fontSize = 30.sp,
                 )
 
                 val focusManager = LocalFocusManager.current

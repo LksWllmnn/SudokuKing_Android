@@ -21,6 +21,7 @@ class SudokuRepository @Inject constructor()
      var runningTimeOut: String = ""
      var attemptToGiveUp = false
      var isRegisteredGame: Boolean = false
+     var difficulty = "easy"
 
      private val currentSudoku = MutableStateFlow(
          BoxedSudoku(Sudoku.create("test",SolvedState.NotSolved, mutableListOf(),createListOfSudokuFields()))

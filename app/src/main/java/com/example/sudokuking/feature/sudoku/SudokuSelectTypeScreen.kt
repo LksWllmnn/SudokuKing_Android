@@ -26,84 +26,94 @@ fun SudokuSelectTypeScreen(viewModel: SudokuViewModel = viewModel(), navControll
 
 @Composable
 fun SudokuSelectTypeScreenUI(sudokus: List<SudokuUI>, navController: NavHostController, giveUp: () -> Unit, attemptGiveUp: () -> Unit, dontGiveUp:() -> Unit, onLoadSudoku:(stage:Int) -> Unit, account: AccountUI?) {
-    Card(
+    Column(
         modifier = Modifier
+            .padding(5.dp)
             .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(10.dp)
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.75f)
+                .padding(10.dp),
+            backgroundColor = MaterialTheme.colors.secondary
         ) {
-            if(account?.id != "") {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (account?.id != "") {
+                    Button(
+                        onClick =
+                        {
+                            if (sudokuRepo.isASudokuRunning) {
+                                attemptGiveUp()
+                            } else {
+                                onLoadSudoku(4)
+                                navController.navigate(SudokuNavigationItem.Game.routeName)
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp),
+
+                        ) {
+                        Text(text = stringResource(R.string.sudoku_gameType_ranked))
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                    ) {
+                        Text(text = stringResource(R.string.sudoku_gameType_ranked))
+                    }
+                }
+
                 Button(
                     onClick =
                     {
-                        if(sudokuRepo.isASudokuRunning) {
+                        if (sudokuRepo.isASudokuRunning) {
                             attemptGiveUp()
                         } else {
-                            onLoadSudoku(4)
-                            navController.navigate(SudokuNavigationItem.Game.routeName)
+                            navController.navigate(SudokuNavigationItem.SelectTypeUnranked.routeName)
                         }
                     },
                     modifier = Modifier
                         .fillMaxWidth(0.75f)
-                        .height(50.dp),
-
-                    ) {
-                    Text(text = stringResource(R.string.sudoku_gameType_ranked))
-                }
-            } else {
-                Button(
-                    onClick = {  },
-                    modifier = Modifier
-                        .fillMaxWidth(0.75f)
-                        .height(50.dp),
-                    colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
-                    ) {
-                    Text(text = stringResource(R.string.sudoku_gameType_ranked))
-                }
-            }
-
-            Button(
-                onClick =
-                {
-                    if(sudokuRepo.isASudokuRunning) {
-                        attemptGiveUp()
-                    } else {
-                        navController.navigate(SudokuNavigationItem.SelectTypeUnranked.routeName)
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .height(50.dp)
-            ) {
-                Text(text = stringResource(R.string.sudoku_gameType_unranked))
-            }
-            if(sudokuRepo.isASudokuRunning) {
-                Button(
-                    onClick = { navController.navigate(SudokuNavigationItem.Game.routeName) },
-                    modifier = Modifier
-                        .fillMaxWidth(0.75f)
                         .height(50.dp)
                 ) {
-                    Text(text = stringResource(R.string.sudoku_gameType_continue))
+                    Text(text = stringResource(R.string.sudoku_gameType_unranked))
                 }
-            } else {
-                Button(
-                    onClick = {  },
-                    modifier = Modifier
-                        .fillMaxWidth(0.75f)
-                        .height(50.dp),
-                    colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
-                ) {
-                    Text(text = stringResource(R.string.sudoku_gameType_continue))
+                if (sudokuRepo.isASudokuRunning) {
+                    Button(
+                        onClick = { navController.navigate(SudokuNavigationItem.Game.routeName) },
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp)
+                    ) {
+                        Text(text = stringResource(R.string.sudoku_gameType_continue))
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                    ) {
+                        Text(text = stringResource(R.string.sudoku_gameType_continue))
+                    }
                 }
             }
-        }
-        if(sudokuRepo.attemptToGiveUp) {
-            GiveUpLastGamePopUp(giveUp, dontGiveUp)
+            if (sudokuRepo.attemptToGiveUp) {
+                GiveUpLastGamePopUp(giveUp, dontGiveUp)
+            }
         }
     }
 }

@@ -75,6 +75,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                     .padding(0.dp, 0.dp,10.dp,0.dp )) {
                     Row {
                         Text(text =  "Best:" + statistic.bestOut)
+                        Text(text = "|Amount: " + statistic.amount)
                     }
                 }
             }

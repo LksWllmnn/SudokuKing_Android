@@ -34,7 +34,8 @@ class StatisticRepository @Inject constructor(
             best = 0,
             amount = 0,
             gameResults = mutableListOf()
-        )
+        ),
+
     )
     fun getAllStatistics(): List<Statistic> {
         return allStatistics
