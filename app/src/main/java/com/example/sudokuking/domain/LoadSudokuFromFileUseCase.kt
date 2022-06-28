@@ -87,13 +87,13 @@ class LoadSudokuFromFileUseCase {
 
                 if(wasLastGameWin) {
                     newLine =  lastLine + randomNum(regSteps)
-
                 }
                 else if(lgFun == false && lastLine <= 0) newLine =  lastLine
                 else newLine =  lastLine - randomNum(regSteps)
             } catch (e:Exception) {
                 newLine = 0
             }
+            if(newLine >= _amountSudoku-1) newLine = 0
             computeNewRankTitle(newLine, _amountSudoku)
 
             var account = accountRepo.getActiveAccount()

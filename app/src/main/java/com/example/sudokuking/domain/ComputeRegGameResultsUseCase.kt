@@ -52,8 +52,6 @@ class ComputeRegGameResultsUseCase {
         }
     }
 
-
-
     private fun computeNewRankTitle(_line: Int, _amountSudoku: Int) {
         when (_line / (_amountSudoku / 4) ) {
             0 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Bronze
