@@ -23,12 +23,12 @@ class ComputeRegGameResultsUseCase {
         }
     }
 
-    private fun computeRegGameResultToStatistic(_regGameResult: RegGameResult, regStatistic: RegStatistic) {
+    private fun computeRegGameResultToStatistic(regGameResultP: RegGameResult, regStatistic: RegStatistic) {
         var isNotInYet = true
         regStatistic.regGameResults.forEach { gameResult ->
-            if(gameResult.id == _regGameResult.id) isNotInYet = false
+            if(gameResult.id == regGameResultP.id) isNotInYet = false
         }
-        if(isNotInYet)regStatistic.regGameResults.add(_regGameResult)
+        if(isNotInYet)regStatistic.regGameResults.add(regGameResultP)
 
         regStatistic.amount = regStatistic.regGameResults.count()
 
@@ -52,19 +52,19 @@ class ComputeRegGameResultsUseCase {
         }
     }
 
-    private fun computeNewRankTitle(_line: Int, _amountSudoku: Int) {
-        when (_line / (_amountSudoku / 4) ) {
+    private fun computeNewRankTitle(line: Int, amountSudoku: Int) {
+        when (line / (amountSudoku / 4) ) {
             0 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Bronze
             1 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Silver
             2 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Gold
             3 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Diamond
         }
-        if(_line == _amountSudoku -1) {
+        if(line == amountSudoku -1) {
             accountRepo.getActiveAccount()?.rankTitle = RankTitle.Finished
         }
     }
 
-    private fun computeRankProgress(_newLine: Int, _amountSudoku: Int):Int {
-        return (((_newLine%(_amountSudoku/4)).toFloat()/(_amountSudoku/4).toFloat())*100).toInt()
+    private fun computeRankProgress(newLine: Int, amountSudoku: Int):Int {
+        return (((newLine%(amountSudoku/4)).toFloat()/(amountSudoku/4).toFloat())*100).toInt()
     }
 }

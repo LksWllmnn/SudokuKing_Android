@@ -25,21 +25,21 @@ class ComputeGameResultsUseCase {
         }
     }
 
-    private fun getStatWithSpecificDifficulty(_difficulty: String): Statistic {
+    private fun getStatWithSpecificDifficulty(difficulty: String): Statistic {
         var result: Statistic = Statistic.create("", 0,0,0,0, 0, mutableListOf())
         statisticRepo.getAllStatistics().forEach { statistic ->
-            if(statistic.title == _difficulty)
+            if(statistic.title == difficulty)
                 result = statistic
         }
         return result
     }
 
-    private fun computeGameResultToStatistic(_gameResult: GameResult, statistic: Statistic) {
+    private fun computeGameResultToStatistic(gameResultP: GameResult, statistic: Statistic) {
         var isNotInYet = true
         statistic.gameResults.forEach { gameResult ->
-            if(gameResult.id == _gameResult.id) isNotInYet = false
+            if(gameResult.id == gameResultP.id) isNotInYet = false
         }
-        if(isNotInYet)statistic.gameResults.add(_gameResult)
+        if(isNotInYet)statistic.gameResults.add(gameResultP)
 
         statistic.amount = statistic.gameResults.count()
 

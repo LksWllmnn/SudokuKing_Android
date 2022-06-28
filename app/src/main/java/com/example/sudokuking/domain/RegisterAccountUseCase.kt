@@ -8,16 +8,16 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class RegisterAccountUseCase {
-    suspend operator fun invoke(_name: String, _password: String): Boolean = withContext(Dispatchers.Default) {
+    suspend operator fun invoke(name: String, password: String): Boolean = withContext(Dispatchers.Default) {
         try {
         accountRepo.accountIsRegistered = true
         accountRepo.getAllAccounts().map { account ->
-            if(account?.username == _name) {
+            if(account?.username == name) {
                 accountRepo.usernameAlreadyExists = true
                 return@withContext false
             }
         }
-        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), _name, _password, RankTitle.Bronze, 0, 0))
+        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), name, password, RankTitle.Bronze, 0, 0))
         return@withContext true
         } catch (e: Exception) {
             return@withContext false

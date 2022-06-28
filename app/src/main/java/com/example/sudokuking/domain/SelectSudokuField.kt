@@ -6,8 +6,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SelectSudokuField {
-    suspend operator fun invoke(_field: SudokuField): Boolean = withContext(Dispatchers.Default) {
-        val field = sudokuRepo.getSudokuFieldById(_field.index)
+    suspend operator fun invoke(fieldP: SudokuField): Boolean = withContext(Dispatchers.Default) {
+        val field = sudokuRepo.getSudokuFieldById(fieldP.index)
         if (field == null) {
             return@withContext false
         }

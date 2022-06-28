@@ -20,20 +20,16 @@ class RegGameResultRepository @Inject constructor(
         )
     }
 
-    suspend fun deleteAll() {
-        dao.deleteAll()
-    }
-
-    suspend fun getAllRegGameResultsByAccId(_accId: String?): List<RegGameResult?> {
+    suspend fun getAllRegGameResultsByAccId(accId: String?): List<RegGameResult?> {
         val result: MutableList<RegGameResult?> = mutableListOf()
 
         getAllRegGameResults().map { regGameResult ->
-            if(regGameResult.accId == _accId) result.add(regGameResult)
+            if(regGameResult.accId == accId) result.add(regGameResult)
         }
         return result
     }
 
-    suspend fun deleteAllWithId(_id: String) {
-        dao.deleteWithId(_id)
+    suspend fun deleteAllWithId(id: String) {
+        dao.deleteWithId(id)
     }
 }

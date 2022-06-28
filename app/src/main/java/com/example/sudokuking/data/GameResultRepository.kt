@@ -20,8 +20,4 @@ class GameResultRepository @Inject constructor(
             gameResultToDb(gameResult)
         )
     }
-
-    suspend fun deleteAll() {
-            dao.deleteAll()
-    }
 }

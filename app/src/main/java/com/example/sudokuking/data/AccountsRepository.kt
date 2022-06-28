@@ -3,7 +3,6 @@ package com.example.sudokuking.data
 import com.example.sudokuking.App
 import com.example.sudokuking.data.database.*
 import com.example.sudokuking.domain.model.Account
-import com.example.sudokuking.domain.model.RankTitle
 import javax.inject.Inject
 
 val accountRepo = AccountsRepository(App.database.accountDao())
@@ -20,17 +19,6 @@ class AccountsRepository @Inject constructor(
 
     private var activeAccount: Account? = null
 
-    private val allAccounts = listOf(
-        Account.create(
-            id = "61ae7e7c-7d78-4db5-aab6-0408fac95d40",
-            username = "test",
-            password = "123456",
-            rankTitle = RankTitle.Bronze,
-            progress = 0,
-            lineRank = 0
-        )
-    ).filterNotNull()
-
     suspend fun getAllAccounts(): List<Account?> {
         return dao.getAll().map { account ->
             accountFromDb(account)
@@ -43,12 +31,8 @@ class AccountsRepository @Inject constructor(
         activeAccount = null
     }
 
-    fun setActiveAccount(_account: Account) {
-        activeAccount = _account
-    }
-
-    fun getAccountById(id: String): Account? = allAccounts.firstOrNull {
-        it.id == id
+    fun setActiveAccount(account: Account) {
+        activeAccount = account
     }
 
     suspend fun getAccountByName(name: String): Account? = getAllAccounts().firstOrNull{
@@ -61,13 +45,13 @@ class AccountsRepository @Inject constructor(
         )
     }
 
-    suspend fun deleteAccount(_account: Account) {
+    suspend fun deleteAccount(account: Account) {
         dao.delete(
-            accountToDb(_account)
+            accountToDb(account)
         )
     }
 
-    suspend fun updateAccount(_account: Account) {
-        dao.update(accountToDb(_account))
+    suspend fun updateAccount(account: Account) {
+        dao.update(accountToDb(account))
     }
 }

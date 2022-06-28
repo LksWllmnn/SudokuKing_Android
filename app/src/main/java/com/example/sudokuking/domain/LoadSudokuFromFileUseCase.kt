@@ -74,10 +74,10 @@ class LoadSudokuFromFileUseCase {
         return regGames.last()?.solved
     }
 
-    private suspend fun computeRegistered(_amountSudoku: Int):Int {
+    private suspend fun computeRegistered(amountSudoku: Int):Int {
         sudokuRepo.isRegisteredGame = true
         val lastLine = accountRepo.getActiveAccount()?.lineRank
-        val regSteps = _amountSudoku / 4
+        val regSteps = amountSudoku / 4
         var newLine = 0
         if(lastLine!=null) {
             try {
@@ -93,30 +93,30 @@ class LoadSudokuFromFileUseCase {
             } catch (e:Exception) {
                 newLine = 0
             }
-            if(newLine >= _amountSudoku-1) newLine = 0
-            computeNewRankTitle(newLine, _amountSudoku)
+            if(newLine >= amountSudoku-1) newLine = 0
+            computeNewRankTitle(newLine, amountSudoku)
 
-            var account = accountRepo.getActiveAccount()
+            val account = accountRepo.getActiveAccount()
             account?.lineRank = newLine
-            account?.progress = computeRankProgress(newLine, _amountSudoku)
+            account?.progress = computeRankProgress(newLine, amountSudoku)
             if(account!=null) UpdateAccountUseCase()(account)
         }
         return newLine
     }
 
-    private fun computeNewRankTitle(_newLine: Int, _amountSudoku: Int) {
-        when (_newLine / (_amountSudoku / 4) ) {
+    private fun computeNewRankTitle(newLine: Int, amountSudoku: Int) {
+        when (newLine / (amountSudoku / 4) ) {
             0 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Bronze
             1 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Silver
             2 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Gold
             3 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Diamond
         }
-        if(_newLine == _amountSudoku -1) {
+        if(newLine == amountSudoku -1) {
             accountRepo.getActiveAccount()?.rankTitle = RankTitle.Finished
         }
     }
 
-    private fun computeRankProgress(_newLine: Int, _amountSudoku: Int):Int {
-        return (((_newLine%(_amountSudoku/4)).toFloat()/(_amountSudoku/4).toFloat())*100).toInt()
+    private fun computeRankProgress(newLine: Int, amountSudoku: Int):Int {
+        return (((newLine%(amountSudoku/4)).toFloat()/(amountSudoku/4).toFloat())*100).toInt()
     }
 }

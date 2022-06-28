@@ -7,7 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
@@ -30,7 +29,7 @@ fun LoginScreen(viewModel: AccountViewModel = viewModel(), navController: NavHos
     LoginScreenUI(account, navController, viewModel::onCheckInputs )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+//@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkInputs:(String, String)-> Unit) {
     Column(modifier = Modifier

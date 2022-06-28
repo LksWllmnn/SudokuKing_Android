@@ -14,7 +14,7 @@ class AccountViewModel @Inject constructor(): ViewModel() {
     fun bindUI(context: Context): LiveData<AccountUI?> =
         liveData {
             val resultAccount = GetActiveAccountUseCase()()
-            var result = AccountUI("","", "",0)
+            val result = AccountUI("","", "",0)
             if (resultAccount != null) {
                 result.id = resultAccount.id
                 result.name = resultAccount.username

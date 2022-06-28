@@ -32,6 +32,5 @@ fun NumbFieldItem(setNumb: (number: Int) -> Unit, number: Int) {
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.secondary,
         )
-
     }
 }

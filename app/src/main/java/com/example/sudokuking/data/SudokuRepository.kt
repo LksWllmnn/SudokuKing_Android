@@ -34,7 +34,7 @@ class SudokuRepository @Inject constructor()
             mutableListOf(),
             createListOfSudokuFields()
         )
-    ).filterNotNull()
+    )
 
 
      private val solvedSudoku = Sudoku.create(
@@ -70,12 +70,12 @@ class SudokuRepository @Inject constructor()
          return result
      }
 
-     fun getSudokuFieldById(_id: Int): SudokuField? = getAllSudokuFields().firstOrNull {
-         it.index == _id
+     fun getSudokuFieldById(id: Int): SudokuField? = getAllSudokuFields().firstOrNull {
+         it.index == id
      }
 
-     fun getFinishedSudokuFieldById(_id: Int): SudokuField? = getAllFinishedSudokuFields().firstOrNull {
-         it.index == _id
+     fun getFinishedSudokuFieldById(id: Int): SudokuField? = getAllFinishedSudokuFields().firstOrNull {
+         it.index == id
      }
 
      fun deselectSudokuFields() {

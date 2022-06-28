@@ -19,7 +19,7 @@ class DeleteAccountUseCase {
         return@withContext true
     }
 
-    private suspend fun deleteAssociatedResults(_id: String) {
-        regGameResultRepo.deleteAllWithId(_id)
+    private suspend fun deleteAssociatedResults(id: String) {
+        regGameResultRepo.deleteAllWithId(id)
     }
 }

@@ -22,15 +22,7 @@ fun NumbFieldContainerItem(setNumb: (number: Int) -> Unit, deleteNumb: () -> Uni
                 .padding(5.dp, 0.dp, 5.dp, 5.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            //TODO: Making Notes in Future
-            //Image(
-            //        painter = painterResource(R.drawable.pencil),
-            //        contentDescription = "pencil",
-            //        modifier = Modifier
-            //            .width(40.dp)
-            //            .height(40.dp)
-            //            .clickable { }
-            //    )
+
             Image(
                 painter = painterResource(R.drawable.erasor),
                 contentDescription = "erase",
