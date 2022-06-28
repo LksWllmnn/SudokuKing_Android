@@ -10,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
@@ -33,7 +32,6 @@ fun RegisterScreen(navController: NavHostController, viewModel: AccountViewModel
     RegisterScreenUI(account, navController, viewModel::onRegister, viewModel::onCloseRegisterPopUp)
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RegisterScreenUI(account: AccountUI?, navController: NavHostController, register:(String, String) -> Unit, closePopUp: () -> Unit) {
     Column(
@@ -110,7 +108,7 @@ fun RegisterScreenUI(account: AccountUI?, navController: NavHostController, regi
             }
         }
     }
-    Column() {
+    Column {
         if(accountRepo.accountIsRegistered) {
             RegisterWasCheckedPopUpItem(navController, closePupUp = closePopUp)
         }

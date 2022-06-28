@@ -33,7 +33,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                         Box(modifier = Modifier
                             .background(Color.Green)
                             .padding(0.dp, 1.dp)
-                            .fillMaxWidth((statistic.resolved).toFloat() / 100)
+                            .fillMaxWidth(0.1f + 0.9f * ((statistic.resolved).toFloat() / 100))
                         ) {
                             Text(text = "" + statistic.resolved + "%")
                         }
@@ -50,7 +50,7 @@ fun UnRegStatItem(statistic: UnRegStatsUI) {
                         Box(modifier = Modifier
                             .background(Color.Red)
                             .padding(0.dp, 1.dp)
-                            .fillMaxWidth((statistic.unresolved).toFloat() / 100)
+                            .fillMaxWidth(0.1f + 0.9f * ((statistic.unresolved).toFloat() / 100))
                         ) {
                             Text("" + statistic.unresolved + "%")
                         }

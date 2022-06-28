@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.sudokuking.data.accountRepo
@@ -33,23 +34,41 @@ fun RegisterWasCheckedPopUpItem(navController:NavController, closePupUp: () -> U
                     .fillMaxWidth()
                     .fillMaxHeight(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.SpaceAround
             ) {
                 if(accountRepo.accountIsRegistered) {
-                    Text(text = "You are successfully registered!")
-                    Button(onClick =
+                    Text(text = "You are successfully registered!",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(5.dp)
+                    )
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp),
+                        onClick =
+                        {
+                            closePupUp()
+                            navController.navigate(AccountNavigationItem.NotLoggedIn.routeName)
+                        })
                     {
-                        closePupUp()
-                        navController.navigate(AccountNavigationItem.NotLoggedIn.routeName)
-                    }) {
                         Text("Go to Loggin")
                     }
                 } else {
-                    Text(text = "Something went wrong")
-                    Button(onClick =
+                    Text(text = "Something went wrong",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(5.dp)
+                    )
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth(0.75f)
+                            .height(50.dp),
+                        onClick =
+                        {
+                            closePupUp()
+                        })
                     {
-                        closePupUp()
-                    }) {
                         Text("Try Again")
                     }
                 }

@@ -29,7 +29,6 @@ fun LoginScreen(viewModel: AccountViewModel = viewModel(), navController: NavHos
     LoginScreenUI(account, navController, viewModel::onCheckInputs )
 }
 
-//@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkInputs:(String, String)-> Unit) {
     Column(modifier = Modifier
