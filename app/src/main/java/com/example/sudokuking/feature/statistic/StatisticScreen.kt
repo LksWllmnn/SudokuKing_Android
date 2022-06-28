@@ -66,7 +66,7 @@ fun StatisticScreenUI(statistics: List<UnRegStatsUI>, regStatistic: RegStatUI?, 
 
                 ) {
                     items(statistics) { statistic ->
-                         UnRegStatItem(statistic)
+                         if(statistic.amount>0) UnRegStatItem(statistic)
                     }
                 }
             }

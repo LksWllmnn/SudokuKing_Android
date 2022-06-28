@@ -16,7 +16,7 @@ class GiveUpGameUseCase {
         sudokuRepo.getSudoku()[0].isSolved = SolvedState.NotSolved
         sudokuRepo.deselectSudokuFields()
         if(sudokuRepo.isRegisteredGame) {
-            regGameResultRepo.addRegGameResult(RegGameResult(UUID.randomUUID().toString(), "" + accountRepo.getActiveAccount()?.id, true, sudokuRepo.runningTime, sudokuRepo.difficulty, 0))
+            regGameResultRepo.addRegGameResult(RegGameResult(UUID.randomUUID().toString(), "" + accountRepo.getActiveAccount()?.id, false, sudokuRepo.runningTime, sudokuRepo.difficulty, 0))
             ComputeRegGameResultsUseCase()()
         } else {
             gameResultRepo.addGameResult(GameResult.create(UUID.randomUUID().toString(),solved = false, time = sudokuRepo.runningTime, difficulty = sudokuRepo.difficulty, sudokuFileLineNumber = 0))

@@ -17,7 +17,7 @@ class RegisterAccountUseCase {
                 return@withContext false
             }
         }
-        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), _name, _password, RankTitle.Bronze, 0))
+        accountRepo.addAccount(Account.create(UUID.randomUUID().toString(), _name, _password, RankTitle.Bronze, 0, 0))
         return@withContext true
         } catch (e: Exception) {
             return@withContext false

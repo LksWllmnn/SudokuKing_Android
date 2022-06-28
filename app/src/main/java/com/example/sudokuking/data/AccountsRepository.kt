@@ -26,6 +26,7 @@ class AccountsRepository @Inject constructor(
             username = "test",
             password = "123456",
             rankTitle = RankTitle.Bronze,
+            progress = 0,
             lineRank = 0
         )
     ).filterNotNull()

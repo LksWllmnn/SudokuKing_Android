@@ -9,6 +9,7 @@ fun accountToDb(account: Account): AccountDb = AccountDb(
     created = account.created,
     deleted = account.deleted,
     rankTitle = account.rankTitle,
+    progress = account.progress,
     lineRank = account.lineRank
 
 )
@@ -18,5 +19,6 @@ fun accountFromDb(account: AccountDb): Account = Account.create(
     username = account.username,
     password = account.password,
     rankTitle = account.rankTitle,
+    progress = account.progress,
     lineRank = account.lineRank
 )

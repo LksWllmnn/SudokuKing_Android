@@ -14,16 +14,17 @@ class AccountViewModel @Inject constructor(): ViewModel() {
     fun bindUI(context: Context): LiveData<AccountUI?> =
         liveData {
             val resultAccount = GetActiveAccountUseCase()()
-            var result = AccountUI("","", "")
+            var result = AccountUI("","", "",0)
             if (resultAccount != null) {
                 result.id = resultAccount.id
                 result.name = resultAccount.username
                 result.rankTitle = rankTitleToString(resultAccount.rankTitle)
+                result.progress = resultAccount.progress
             }
             emit(result)
         }
 
-    fun rankTitleToString(rankTitle: RankTitle): String {
+    private fun rankTitleToString(rankTitle: RankTitle): String {
         return when (rankTitle) {
             RankTitle.Bronze -> "Bronze"
             RankTitle.Silver -> "Silver"

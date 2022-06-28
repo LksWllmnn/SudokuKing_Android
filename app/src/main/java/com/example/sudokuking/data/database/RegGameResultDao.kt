@@ -1,6 +1,7 @@
 package com.example.sudokuking.data.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -18,4 +19,7 @@ abstract class RegGameResultDao {
 
     @Query("DELETE FROM regGameResult")
     abstract suspend fun deleteAll()
+
+    @Query("DELETE FROM regGameResult WHERE accountID = :id")
+    abstract suspend fun deleteWithId(id: String)
 }

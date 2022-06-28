@@ -16,6 +16,7 @@ import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.sudokuking.R
 import com.example.sudokuking.data.accountRepo
 
 @Composable
@@ -67,7 +69,7 @@ fun RegisterScreenUI(account: AccountUI?, navController: NavHostController, regi
                     value = username,
                     onValueChange = { username = it },
                     singleLine = true,
-                    label = { Text("Username") },
+                    label = { Text(stringResource(id = R.string.account_Username_label)) },
                     keyboardActions = KeyboardActions(
                         onDone = {
                             focusManager.clearFocus()
@@ -87,7 +89,7 @@ fun RegisterScreenUI(account: AccountUI?, navController: NavHostController, regi
                     value = password,
                     onValueChange = { password = it },
                     singleLine = true,
-                    label = { Text("Password") },
+                    label = { Text(stringResource(id = R.string.account_Password_label)) },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(

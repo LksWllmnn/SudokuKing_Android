@@ -19,7 +19,24 @@ fun RegStatItem(statistic: RegStatUI, activeAccount: AccountUI) {
             .padding(5.dp))
     {
         Column {
-            Text(text = activeAccount.rankTitle)
+
+            Box(modifier = Modifier
+                .fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Box(modifier = Modifier.fillMaxWidth(0.3f)) {
+                        Text(text = activeAccount.rankTitle + ": ")
+                    }
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(modifier = Modifier
+                            .background(Color.Yellow)
+                            .padding(0.dp, 1.dp)
+                            .fillMaxWidth(0.1f + 0.9f * ((activeAccount.progress).toFloat() / 100))
+                        ) {
+                            Text(text = "" + activeAccount.progress + "%")
+                        }
+                    }
+                }
+            }
             Box(modifier = Modifier
                 .fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -30,7 +47,7 @@ fun RegStatItem(statistic: RegStatUI, activeAccount: AccountUI) {
                         Box(modifier = Modifier
                             .background(Color.Green)
                             .padding(0.dp, 1.dp)
-                            .fillMaxWidth((statistic.resolved).toFloat() / 100)
+                            .fillMaxWidth(0.1f + 0.9f * ((statistic.resolved).toFloat() / 100))
                         ) {
                             Text(text = "" + statistic.resolved + "%")
                         }
@@ -47,7 +64,7 @@ fun RegStatItem(statistic: RegStatUI, activeAccount: AccountUI) {
                         Box(modifier = Modifier
                             .background(Color.Red)
                             .padding(0.dp, 1.dp)
-                            .fillMaxWidth((statistic.unresolved).toFloat() / 100)
+                            .fillMaxWidth(0.1f + 0.9f * ((statistic.unresolved).toFloat() / 100))
                         ) {
                             Text("" + statistic.unresolved + "%")
                         }

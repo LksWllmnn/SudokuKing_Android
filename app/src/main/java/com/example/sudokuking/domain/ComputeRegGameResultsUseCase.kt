@@ -3,6 +3,8 @@ package com.example.sudokuking.domain
 import com.example.sudokuking.data.accountRepo
 import com.example.sudokuking.data.regGameResultRepo
 import com.example.sudokuking.data.regStatisticRepo
+import com.example.sudokuking.data.sudokuRepo
+import com.example.sudokuking.domain.model.RankTitle
 import com.example.sudokuking.domain.model.RegGameResult
 import com.example.sudokuking.domain.model.RegStatistic
 import kotlinx.coroutines.Dispatchers
@@ -41,9 +43,30 @@ class ComputeRegGameResultsUseCase {
         regStatistic.average = timeSum/counterResolved
         regStatistic.resolved = (counterResolved * 100/regStatistic.amount)
         regStatistic.unresolved = 100 - regStatistic.resolved
+
+        val activeAccount = accountRepo.getActiveAccount()
+        val amountSudoku = sudokuRepo.allSudokuString.length/166
+        if(activeAccount != null) {
+            computeNewRankTitle(activeAccount.lineRank, amountSudoku)
+            computeRankProgress(activeAccount.lineRank, amountSudoku)
+        }
     }
 
-    private fun computeLineRank() {
 
+
+    private fun computeNewRankTitle(_line: Int, _amountSudoku: Int) {
+        when (_line / (_amountSudoku / 4) ) {
+            0 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Bronze
+            1 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Silver
+            2 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Gold
+            3 -> accountRepo.getActiveAccount()?.rankTitle = RankTitle.Diamond
+        }
+        if(_line == _amountSudoku -1) {
+            accountRepo.getActiveAccount()?.rankTitle = RankTitle.Finished
+        }
+    }
+
+    private fun computeRankProgress(_newLine: Int, _amountSudoku: Int):Int {
+        return (((_newLine%(_amountSudoku/4)).toFloat()/(_amountSudoku/4).toFloat())*100).toInt()
     }
 }

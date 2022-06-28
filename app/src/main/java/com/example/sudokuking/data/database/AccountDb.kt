@@ -14,5 +14,6 @@ data class AccountDb (
     val created: ZonedDateTime,
     val deleted: ZonedDateTime,
     val rankTitle: RankTitle,
+    val progress: Int,
     val lineRank: Int
 )

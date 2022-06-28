@@ -58,17 +58,31 @@ fun LoginScreenUI(account: AccountUI?, navController: NavHostController, checkIn
                         .padding(5.dp),
                     fontSize = 30.sp,
                 )
+
+                val focusManager = LocalFocusManager.current
                 var username by remember { mutableStateOf("") }
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
                     label = { Text(stringResource(id = R.string.account_Username_label)) },
                     singleLine = true,
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            focusManager.clearFocus()
+                        }
+                    ),
+                    modifier = Modifier.onKeyEvent {
+                        if(it.nativeKeyEvent.keyCode == NativeKeyEvent.KEYCODE_ENTER) {
+                            focusManager.clearFocus()
+                            true
+                        }
+                        false
+                    }
                 )
                 
                 Text(text = "Account: " + account?.name)
 
-                val focusManager = LocalFocusManager.current
+
                 var password by remember { mutableStateOf("") }
                 OutlinedTextField(
                     value = password,
